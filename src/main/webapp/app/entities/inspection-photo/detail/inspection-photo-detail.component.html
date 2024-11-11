@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (inspectionPhoto(); as inspectionPhotoRef) {
+      <div>
+        <h2 data-cy="inspectionPhotoDetailsHeading">
+          <span jhiTranslate="autoMaatApp.inspectionPhoto.detail.title">Inspection Photo</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ inspectionPhotoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspectionPhoto.photo">Photo</span></dt>
+          <dd>
+            @if (inspectionPhotoRef.photo) {
+              <div>
+                <a (click)="openFile(inspectionPhotoRef.photo ?? '', inspectionPhotoRef.photoContentType)">
+                  <img
+                    [src]="'data:' + inspectionPhotoRef.photoContentType + ';base64,' + inspectionPhotoRef.photo"
+                    style="max-width: 100%"
+                    alt="inspectionPhoto"
+                  />
+                </a>
+                {{ inspectionPhotoRef.photoContentType }}, {{ byteSize(inspectionPhotoRef.photo ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspectionPhoto.inspection">Inspection</span></dt>
+          <dd>
+            @if (inspectionPhoto()!.inspection) {
+              <div>
+                <a [routerLink]="['/inspection', inspectionPhoto()!.inspection?.id, 'view']">{{ inspectionPhotoRef.inspection?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/inspection-photo', inspectionPhotoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

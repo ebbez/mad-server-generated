@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090119"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "photo",
+      "fieldType": "ImageBlob"
+    }
+  ],
+  "name": "InspectionPhoto",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "photo",
+      "relationshipName": "inspection",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

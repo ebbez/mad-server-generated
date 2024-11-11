@@ -1,0 +1,11 @@
+id;brand;model;picture;picture_content_type;fuel;options;license_plate;engine_size;model_year;since;price;nr_of_seats;body;longitude;latitude
+1;mid;till;../fake-data/blob/hipster.png;image/png;ELECTRIC;given faithfully;utilized;8298;9550;2024-11-10;19376.68;11200;SEDAN;2753.81;19019.44
+2;afore kindly huzzah;airport brightly alert;../fake-data/blob/hipster.png;image/png;HYBRID;violently;yum ugh;2998;26098;2024-11-11;19829.53;28587;TRUCK;3440.98;15510.72
+3;curl scary sure-footed;damp to ha;../fake-data/blob/hipster.png;image/png;HYBRID;behind;well until;16090;15275;2024-11-10;4682.36;30371;STATIONWAGON;27117.39;20997.08
+4;whoa save;spirited oof yuck;../fake-data/blob/hipster.png;image/png;ELECTRIC;present;er;624;31738;2024-11-10;18741.04;20139;SUV;23620.18;7341.08
+5;circa confound;aha bitterly;../fake-data/blob/hipster.png;image/png;ELECTRIC;except provided inquisitively;rosin profuse;9431;23375;2024-11-10;5897.6;25787;STATIONWAGON;20035.15;14973.5
+6;minus;glaring heating milestone;../fake-data/blob/hipster.png;image/png;ELECTRIC;opposite;regarding trash cap;16098;1287;2024-11-10;4536.02;27191;HATCHBACK;23851.35;481.53
+7;innocently blah;svelte;../fake-data/blob/hipster.png;image/png;DIESEL;badly energetically;circulate;24280;19848;2024-11-10;21681.05;20759;MPV;24773.7;24172.45
+8;serene shore;elegantly trim;../fake-data/blob/hipster.png;image/png;ELECTRIC;eek finally lest;whoever;20028;10654;2024-11-10;8472.22;9498;MINIVAN;13880.56;1184.18
+9;who;juvenile which blah;../fake-data/blob/hipster.png;image/png;DIESEL;contrail reach;mundane royal fork;20371;19875;2024-11-11;5509.2;31539;MPV;18596.73;10961.17
+10;urgently;superb rapidly;../fake-data/blob/hipster.png;image/png;HYBRID;gadzooks;warmhearted vista;7273;15607;2024-11-10;18442.93;31496;MINIVAN;5599.27;1853.56

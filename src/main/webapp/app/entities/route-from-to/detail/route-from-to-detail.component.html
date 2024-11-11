@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (routeFromTo(); as routeFromToRef) {
+      <div>
+        <h2 data-cy="routeFromToDetailsHeading"><span jhiTranslate="autoMaatApp.routeFromTo.detail.title">Route From To</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ routeFromToRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.routeFromTo.code">Code</span></dt>
+          <dd>
+            <span>{{ routeFromToRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.routeFromTo.description">Description</span></dt>
+          <dd>
+            <span>{{ routeFromToRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.routeFromTo.date">Date</span></dt>
+          <dd>
+            <span>{{ routeFromToRef.date | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.routeFromTo.employee">Employee</span></dt>
+          <dd>
+            @if (routeFromTo()!.employee) {
+              <div>
+                <a [routerLink]="['/employee', routeFromTo()!.employee?.id, 'view']">{{ routeFromToRef.employee?.lastName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/route-from-to', routeFromToRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

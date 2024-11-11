@@ -1,0 +1,28 @@
+{
+  "autoMaatApp": {
+    "routeFromTo": {
+      "home": {
+        "title": "Route From Tos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Route From To",
+        "createOrEditLabel": "Maak of wijzig een Route From To",
+        "notFound": "No Route From Tos found"
+      },
+      "created": "A new Route From To is created with identifier {{ param }}",
+      "updated": "A Route From To is updated with identifier {{ param }}",
+      "deleted": "A Route From To is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Route From To {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Route From To"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "date": "Date",
+      "routeStop": "Route Stop",
+      "employee": "Employee"
+    }
+  }
+}

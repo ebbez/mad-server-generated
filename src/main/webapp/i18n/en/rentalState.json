@@ -1,0 +1,11 @@
+{
+  "autoMaatApp": {
+    "RentalState": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "RESERVED": "RESERVED",
+      "PICKUP": "PICKUP",
+      "RETURNED": "RETURNED"
+    }
+  }
+}

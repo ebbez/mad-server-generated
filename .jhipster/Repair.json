@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090219"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "repairStatus",
+      "fieldType": "RepairStatus",
+      "fieldValues": "PLANNED,DOING,DONE,CANCELLED"
+    },
+    {
+      "fieldName": "dateCompleted",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Repair",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "licensePlate",
+      "otherEntityName": "car",
+      "otherEntityRelationshipName": "repair",
+      "relationshipName": "car",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "repair",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "repair",
+      "relationshipName": "inspection",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

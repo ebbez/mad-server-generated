@@ -1,0 +1,11 @@
+{
+  "autoMaatApp": {
+    "RepairStatus": {
+      "null": "",
+      "PLANNED": "PLANNED",
+      "DOING": "DOING",
+      "DONE": "DONE",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

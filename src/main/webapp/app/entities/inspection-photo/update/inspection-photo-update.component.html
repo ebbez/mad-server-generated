@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-inspection-photo-heading"
+        data-cy="InspectionPhotoCreateUpdateHeading"
+        jhiTranslate="autoMaatApp.inspectionPhoto.home.createOrEditLabel"
+      >
+        Create or edit a Inspection Photo
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="autoMaatApp.inspectionPhoto.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let photoRef = editForm.get('photo')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_photo" jhiTranslate="autoMaatApp.inspectionPhoto.photo">Photo</label>
+          <div>
+            @if (photoRef.value) {
+              <img
+                [src]="'data:' + editForm.get('photoContentType')!.value + ';base64,' + photoRef.value"
+                style="max-height: 100px"
+                alt="inspectionPhoto"
+              />
+            }
+            @if (photoRef.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(photoRef.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('photo', 'photoContentType', 'file_photo')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_photo"
+              data-cy="photo"
+              (change)="setFileData($event, 'photo', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_inspection" jhiTranslate="autoMaatApp.inspectionPhoto.inspection">Inspection</label>
+          <select
+            class="form-control"
+            id="field_inspection"
+            data-cy="inspection"
+            name="inspection"
+            formControlName="inspection"
+            [compareWith]="compareInspection"
+          >
+            <option [ngValue]="null"></option>
+            @for (inspectionOption of inspectionsSharedCollection; track $index) {
+              <option [ngValue]="inspectionOption">{{ inspectionOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

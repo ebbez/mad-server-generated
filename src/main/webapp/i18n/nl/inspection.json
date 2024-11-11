@@ -1,0 +1,34 @@
+{
+  "autoMaatApp": {
+    "inspection": {
+      "home": {
+        "title": "Inspections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Inspection",
+        "createOrEditLabel": "Maak of wijzig een Inspection",
+        "notFound": "No Inspections found"
+      },
+      "created": "A new Inspection is created with identifier {{ param }}",
+      "updated": "A Inspection is updated with identifier {{ param }}",
+      "deleted": "A Inspection is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Inspection {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Inspection"
+      },
+      "id": "ID",
+      "code": "Code",
+      "odometer": "Odometer",
+      "result": "Result",
+      "description": "Description",
+      "photo": "Photo",
+      "completed": "Completed",
+      "photo": "Photo",
+      "repair": "Repair",
+      "car": "Car",
+      "employee": "Employee",
+      "rental": "Rental"
+    }
+  }
+}

@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="RepairHeading">
+    <span jhiTranslate="autoMaatApp.repair.home.title">Repairs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="autoMaatApp.repair.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-repair"
+        [routerLink]="['/repair/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="autoMaatApp.repair.home.createLabel">Create a new Repair</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (repairs?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="autoMaatApp.repair.home.notFound">No Repairs found</span>
+    </div>
+  }
+
+  @if (repairs && repairs.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="repairStatus">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.repairStatus">Repair Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateCompleted">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.dateCompleted">Date Completed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="car.licensePlate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.car">Car</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employee.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.employee">Employee</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="inspection.id">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.repair.inspection">Inspection</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (repair of repairs; track trackId(repair)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/repair', repair.id, 'view']">{{ repair.id }}</a>
+              </td>
+              <td>{{ repair.description }}</td>
+              <td [jhiTranslate]="'autoMaatApp.RepairStatus.' + (repair.repairStatus ?? 'null')">
+                {{ { null: '', PLANNED: 'PLANNED', DOING: 'DOING', DONE: 'DONE', CANCELLED: 'CANCELLED' }[repair.repairStatus ?? 'null'] }}
+              </td>
+              <td>{{ repair.dateCompleted | formatMediumDate }}</td>
+              <td>
+                @if (repair.car) {
+                  <div>
+                    <a [routerLink]="['/car', repair.car.id, 'view']">{{ repair.car.licensePlate }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (repair.employee) {
+                  <div>
+                    <a [routerLink]="['/employee', repair.employee.id, 'view']">{{ repair.employee.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (repair.inspection) {
+                  <div>
+                    <a [routerLink]="['/inspection', repair.inspection.id, 'view']">{{ repair.inspection.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/repair', repair.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/repair', repair.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(repair)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (repairs && repairs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

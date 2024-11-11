@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20241111085919"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "nr",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "from",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Employee",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "inspection",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "repair",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "repair",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "routeFromTo",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "routeFromTo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

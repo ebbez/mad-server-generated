@@ -1,0 +1,263 @@
+<div>
+  <h2 id="page-heading" data-cy="CarHeading">
+    <span jhiTranslate="autoMaatApp.car.home.title">Cars</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="autoMaatApp.car.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-car"
+        [routerLink]="['/car/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="autoMaatApp.car.home.createLabel">Create a new Car</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (cars?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="autoMaatApp.car.home.notFound">No Cars found</span>
+    </div>
+  }
+
+  @if (cars && cars.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="brand">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.brand">Brand</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="model">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.model">Model</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="picture">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.picture">Picture</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fuel">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.fuel">Fuel</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="options">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.options">Options</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="licensePlate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.licensePlate">License Plate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engineSize">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.engineSize">Engine Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modelYear">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.modelYear">Model Year</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="since">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.since">Since</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="price">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.price">Price</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nrOfSeats">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.nrOfSeats">Nr Of Seats</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="body">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.body">Body</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="longitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (car of cars; track trackId(car)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/car', car.id, 'view']">{{ car.id }}</a>
+              </td>
+              <td>{{ car.brand }}</td>
+              <td>{{ car.model }}</td>
+              <td>
+                @if (car.picture) {
+                  <a (click)="openFile(car.picture, car.pictureContentType)">
+                    <img [src]="'data:' + car.pictureContentType + ';base64,' + car.picture" style="max-height: 30px" alt="car" />
+                  </a>
+                  <span>{{ car.pictureContentType }}, {{ byteSize(car.picture) }}</span>
+                }
+              </td>
+              <td [jhiTranslate]="'autoMaatApp.Fuel.' + (car.fuel ?? 'null')">
+                {{ { null: '', GASOLINE: 'GASOLINE', DIESEL: 'DIESEL', HYBRID: 'HYBRID', ELECTRIC: 'ELECTRIC' }[car.fuel ?? 'null'] }}
+              </td>
+              <td>{{ car.options }}</td>
+              <td>{{ car.licensePlate }}</td>
+              <td>{{ car.engineSize }}</td>
+              <td>{{ car.modelYear }}</td>
+              <td>{{ car.since | formatMediumDate }}</td>
+              <td>{{ car.price }}</td>
+              <td>{{ car.nrOfSeats }}</td>
+              <td [jhiTranslate]="'autoMaatApp.Body.' + (car.body ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    STATIONWAGON: 'STATIONWAGON',
+                    SEDAN: 'SEDAN',
+                    HATCHBACK: 'HATCHBACK',
+                    MINIVAN: 'MINIVAN',
+                    MPV: 'MPV',
+                    SUV: 'SUV',
+                    COUPE: 'COUPE',
+                    TRUCK: 'TRUCK',
+                    CONVERTIBLE: 'CONVERTIBLE',
+                  }[car.body ?? 'null']
+                }}
+              </td>
+              <td>{{ car.longitude }}</td>
+              <td>{{ car.latitude }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/inspection']"
+                    [queryParams]="{ 'filter[carId.in]': car.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('autoMaatApp.car.inspection' | translate) }"
+                      >Show Inspection</span
+                    >
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/rental']"
+                    [queryParams]="{ 'filter[carId.in]': car.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      jhiTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('autoMaatApp.car.rental' | translate) }"
+                      >Show Rental</span
+                    >
+                  </button>
+                  <a [routerLink]="['/car', car.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/car', car.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(car)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (cars && cars.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

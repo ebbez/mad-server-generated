@@ -1,0 +1,121 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-repair-heading" data-cy="RepairCreateUpdateHeading" jhiTranslate="autoMaatApp.repair.home.createOrEditLabel">
+        Create or edit a Repair
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="autoMaatApp.repair.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="autoMaatApp.repair.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_repairStatus" jhiTranslate="autoMaatApp.repair.repairStatus">Repair Status</label>
+          <select class="form-control" name="repairStatus" formControlName="repairStatus" id="field_repairStatus" data-cy="repairStatus">
+            <option [ngValue]="null">{{ 'autoMaatApp.RepairStatus.null' | translate }}</option>
+            @for (repairStatus of repairStatusValues; track $index) {
+              <option [value]="repairStatus">{{ 'autoMaatApp.RepairStatus.' + repairStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateCompleted" jhiTranslate="autoMaatApp.repair.dateCompleted">Date Completed</label>
+          <div class="input-group">
+            <input
+              id="field_dateCompleted"
+              data-cy="dateCompleted"
+              type="text"
+              class="form-control"
+              name="dateCompleted"
+              ngbDatepicker
+              #dateCompletedDp="ngbDatepicker"
+              formControlName="dateCompleted"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCompletedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_car" jhiTranslate="autoMaatApp.repair.car">Car</label>
+          <select class="form-control" id="field_car" data-cy="car" name="car" formControlName="car" [compareWith]="compareCar">
+            <option [ngValue]="null"></option>
+            @for (carOption of carsSharedCollection; track $index) {
+              <option [ngValue]="carOption">{{ carOption.licensePlate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employee" jhiTranslate="autoMaatApp.repair.employee">Employee</label>
+          <select
+            class="form-control"
+            id="field_employee"
+            data-cy="employee"
+            name="employee"
+            formControlName="employee"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="null"></option>
+            @for (employeeOption of employeesSharedCollection; track $index) {
+              <option [ngValue]="employeeOption">{{ employeeOption.lastName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_inspection" jhiTranslate="autoMaatApp.repair.inspection">Inspection</label>
+          <select
+            class="form-control"
+            id="field_inspection"
+            data-cy="inspection"
+            name="inspection"
+            formControlName="inspection"
+            [compareWith]="compareInspection"
+          >
+            <option [ngValue]="null"></option>
+            @for (inspectionOption of inspectionsSharedCollection; track $index) {
+              <option [ngValue]="inspectionOption">{{ inspectionOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

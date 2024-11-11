@@ -1,0 +1,32 @@
+{
+  "autoMaatApp": {
+    "rental": {
+      "home": {
+        "title": "Rentals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Rental",
+        "createOrEditLabel": "Maak of wijzig een Rental",
+        "notFound": "No Rentals found"
+      },
+      "created": "A new Rental is created with identifier {{ param }}",
+      "updated": "A Rental is updated with identifier {{ param }}",
+      "deleted": "A Rental is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Rental {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Rental"
+      },
+      "id": "ID",
+      "code": "Code",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "state": "State",
+      "inspection": "Inspection",
+      "customer": "Customer",
+      "car": "Car"
+    }
+  }
+}

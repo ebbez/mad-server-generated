@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090519"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "nr",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "RouteStop",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "routeFromTo",
+      "otherEntityRelationshipName": "routeStop",
+      "relationshipName": "routeFromTo",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "routeStop",
+      "relationshipName": "location",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

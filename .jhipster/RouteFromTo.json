@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090419"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "RouteFromTo",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "routeStop",
+      "otherEntityRelationshipName": "routeFromTo",
+      "relationshipName": "routeStop",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "routeFromTo",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

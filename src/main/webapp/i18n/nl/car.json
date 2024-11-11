@@ -1,0 +1,40 @@
+{
+  "autoMaatApp": {
+    "car": {
+      "home": {
+        "title": "Cars",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Car",
+        "createOrEditLabel": "Maak of wijzig een Car",
+        "notFound": "No Cars found"
+      },
+      "created": "A new Car is created with identifier {{ param }}",
+      "updated": "A Car is updated with identifier {{ param }}",
+      "deleted": "A Car is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Car {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Car"
+      },
+      "id": "ID",
+      "brand": "Brand",
+      "model": "Model",
+      "picture": "Picture",
+      "fuel": "Fuel",
+      "options": "Options",
+      "licensePlate": "License Plate",
+      "engineSize": "Engine Size",
+      "modelYear": "Model Year",
+      "since": "Since",
+      "price": "Price",
+      "nrOfSeats": "Nr Of Seats",
+      "body": "Body",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "inspection": "Inspection",
+      "repair": "Repair",
+      "rental": "Rental"
+    }
+  }
+}

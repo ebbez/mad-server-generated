@@ -1,0 +1,164 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-inspection-heading" data-cy="InspectionCreateUpdateHeading" jhiTranslate="autoMaatApp.inspection.home.createOrEditLabel">
+        Create or edit a Inspection
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="autoMaatApp.inspection.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code" jhiTranslate="autoMaatApp.inspection.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_odometer" jhiTranslate="autoMaatApp.inspection.odometer">Odometer</label>
+          <input type="number" class="form-control" name="odometer" id="field_odometer" data-cy="odometer" formControlName="odometer" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_result" jhiTranslate="autoMaatApp.inspection.result">Result</label>
+          <input type="text" class="form-control" name="result" id="field_result" data-cy="result" formControlName="result" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="autoMaatApp.inspection.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        @let photoRef = editForm.get('photo')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_photo" jhiTranslate="autoMaatApp.inspection.photo">Photo</label>
+          <div>
+            @if (photoRef.value) {
+              <img
+                [src]="'data:' + editForm.get('photoContentType')!.value + ';base64,' + photoRef.value"
+                style="max-height: 100px"
+                alt="inspection"
+              />
+            }
+            @if (photoRef.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(photoRef.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('photo', 'photoContentType', 'file_photo')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_photo"
+              data-cy="photo"
+              (change)="setFileData($event, 'photo', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_completed" jhiTranslate="autoMaatApp.inspection.completed">Completed</label>
+          <div class="d-flex">
+            <input
+              id="field_completed"
+              data-cy="completed"
+              type="datetime-local"
+              class="form-control"
+              name="completed"
+              formControlName="completed"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_car" jhiTranslate="autoMaatApp.inspection.car">Car</label>
+          <select class="form-control" id="field_car" data-cy="car" name="car" formControlName="car" [compareWith]="compareCar">
+            <option [ngValue]="null"></option>
+            @for (carOption of carsSharedCollection; track $index) {
+              <option [ngValue]="carOption">{{ carOption.licensePlate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employee" jhiTranslate="autoMaatApp.inspection.employee">Employee</label>
+          <select
+            class="form-control"
+            id="field_employee"
+            data-cy="employee"
+            name="employee"
+            formControlName="employee"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="null"></option>
+            @for (employeeOption of employeesSharedCollection; track $index) {
+              <option [ngValue]="employeeOption">{{ employeeOption.lastName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rental" jhiTranslate="autoMaatApp.inspection.rental">Rental</label>
+          <select
+            class="form-control"
+            id="field_rental"
+            data-cy="rental"
+            name="rental"
+            formControlName="rental"
+            [compareWith]="compareRental"
+          >
+            <option [ngValue]="null"></option>
+            @for (rentalOption of rentalsSharedCollection; track $index) {
+              <option [ngValue]="rentalOption">{{ rentalOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

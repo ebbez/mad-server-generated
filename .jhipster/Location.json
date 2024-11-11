@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090319"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stateProvince",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Location",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "customer",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "routeStop",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "routeStop",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

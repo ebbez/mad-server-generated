@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (inspection(); as inspectionRef) {
+      <div>
+        <h2 data-cy="inspectionDetailsHeading"><span jhiTranslate="autoMaatApp.inspection.detail.title">Inspection</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ inspectionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.code">Code</span></dt>
+          <dd>
+            <span>{{ inspectionRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.odometer">Odometer</span></dt>
+          <dd>
+            <span>{{ inspectionRef.odometer }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.result">Result</span></dt>
+          <dd>
+            <span>{{ inspectionRef.result }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.description">Description</span></dt>
+          <dd>
+            <span>{{ inspectionRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.photo">Photo</span></dt>
+          <dd>
+            @if (inspectionRef.photo) {
+              <div>
+                <a (click)="openFile(inspectionRef.photo ?? '', inspectionRef.photoContentType)">
+                  <img
+                    [src]="'data:' + inspectionRef.photoContentType + ';base64,' + inspectionRef.photo"
+                    style="max-width: 100%"
+                    alt="inspection"
+                  />
+                </a>
+                {{ inspectionRef.photoContentType }}, {{ byteSize(inspectionRef.photo ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.completed">Completed</span></dt>
+          <dd>
+            <span>{{ inspectionRef.completed | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.car">Car</span></dt>
+          <dd>
+            @if (inspection()!.car) {
+              <div>
+                <a [routerLink]="['/car', inspection()!.car?.id, 'view']">{{ inspectionRef.car?.licensePlate }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.employee">Employee</span></dt>
+          <dd>
+            @if (inspection()!.employee) {
+              <div>
+                <a [routerLink]="['/employee', inspection()!.employee?.id, 'view']">{{ inspectionRef.employee?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.inspection.rental">Rental</span></dt>
+          <dd>
+            @if (inspection()!.rental) {
+              <div>
+                <a [routerLink]="['/rental', inspection()!.rental?.id, 'view']">{{ inspectionRef.rental?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/inspection', inspectionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

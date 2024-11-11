@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = nl.hanze.se4.\
+    automaat.config.SqlTestContainersSpringContextCustomizerFactory

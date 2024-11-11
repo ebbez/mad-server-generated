@@ -1,0 +1,25 @@
+{
+  "autoMaatApp": {
+    "inspectionPhoto": {
+      "home": {
+        "title": "Inspection Photos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Inspection Photo",
+        "createOrEditLabel": "Maak of wijzig een Inspection Photo",
+        "notFound": "No Inspection Photos found"
+      },
+      "created": "A new Inspection Photo is created with identifier {{ param }}",
+      "updated": "A Inspection Photo is updated with identifier {{ param }}",
+      "deleted": "A Inspection Photo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Inspection Photo {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Inspection Photo"
+      },
+      "id": "ID",
+      "photo": "Photo",
+      "inspection": "Inspection"
+    }
+  }
+}

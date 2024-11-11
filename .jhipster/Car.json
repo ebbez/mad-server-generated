@@ -1,0 +1,93 @@
+{
+  "annotations": {
+    "changelogDate": "20241111085619"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "brand",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "picture",
+      "fieldType": "ImageBlob"
+    },
+    {
+      "fieldName": "fuel",
+      "fieldType": "Fuel",
+      "fieldValues": "GASOLINE,DIESEL,HYBRID,ELECTRIC"
+    },
+    {
+      "fieldName": "options",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "licensePlate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "engineSize",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "modelYear",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "since",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "nrOfSeats",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "body",
+      "fieldType": "Body",
+      "fieldValues": "STATIONWAGON,SEDAN,HATCHBACK,MINIVAN,MPV,SUV,COUPE,TRUCK,CONVERTIBLE"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Float"
+    }
+  ],
+  "name": "Car",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "car",
+      "relationshipName": "inspection",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "repair",
+      "otherEntityRelationshipName": "car",
+      "relationshipName": "repair",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "rental",
+      "otherEntityRelationshipName": "car",
+      "relationshipName": "rental",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

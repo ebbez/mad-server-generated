@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (car(); as carRef) {
+      <div>
+        <h2 data-cy="carDetailsHeading"><span jhiTranslate="autoMaatApp.car.detail.title">Car</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ carRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.brand">Brand</span></dt>
+          <dd>
+            <span>{{ carRef.brand }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.model">Model</span></dt>
+          <dd>
+            <span>{{ carRef.model }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.picture">Picture</span></dt>
+          <dd>
+            @if (carRef.picture) {
+              <div>
+                <a (click)="openFile(carRef.picture ?? '', carRef.pictureContentType)">
+                  <img [src]="'data:' + carRef.pictureContentType + ';base64,' + carRef.picture" style="max-width: 100%" alt="car" />
+                </a>
+                {{ carRef.pictureContentType }}, {{ byteSize(carRef.picture ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.fuel">Fuel</span></dt>
+          <dd>
+            <span [jhiTranslate]="'autoMaatApp.Fuel.' + (carRef.fuel ?? 'null')">{{
+              { null: '', GASOLINE: 'GASOLINE', DIESEL: 'DIESEL', HYBRID: 'HYBRID', ELECTRIC: 'ELECTRIC' }[carRef.fuel ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.options">Options</span></dt>
+          <dd>
+            <span>{{ carRef.options }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.licensePlate">License Plate</span></dt>
+          <dd>
+            <span>{{ carRef.licensePlate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.engineSize">Engine Size</span></dt>
+          <dd>
+            <span>{{ carRef.engineSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.modelYear">Model Year</span></dt>
+          <dd>
+            <span>{{ carRef.modelYear }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.since">Since</span></dt>
+          <dd>
+            <span>{{ carRef.since | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.price">Price</span></dt>
+          <dd>
+            <span>{{ carRef.price }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.nrOfSeats">Nr Of Seats</span></dt>
+          <dd>
+            <span>{{ carRef.nrOfSeats }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.body">Body</span></dt>
+          <dd>
+            <span [jhiTranslate]="'autoMaatApp.Body.' + (carRef.body ?? 'null')">{{
+              {
+                null: '',
+                STATIONWAGON: 'STATIONWAGON',
+                SEDAN: 'SEDAN',
+                HATCHBACK: 'HATCHBACK',
+                MINIVAN: 'MINIVAN',
+                MPV: 'MPV',
+                SUV: 'SUV',
+                COUPE: 'COUPE',
+                TRUCK: 'TRUCK',
+                CONVERTIBLE: 'CONVERTIBLE',
+              }[carRef.body ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ carRef.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ carRef.latitude }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/car', carRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

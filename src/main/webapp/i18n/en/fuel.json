@@ -1,0 +1,11 @@
+{
+  "autoMaatApp": {
+    "Fuel": {
+      "null": "",
+      "GASOLINE": "GASOLINE",
+      "DIESEL": "DIESEL",
+      "HYBRID": "HYBRID",
+      "ELECTRIC": "ELECTRIC"
+    }
+  }
+}

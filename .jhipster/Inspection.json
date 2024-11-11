@@ -1,0 +1,76 @@
+{
+  "annotations": {
+    "changelogDate": "20241111090019"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "odometer",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "ImageBlob"
+    },
+    {
+      "fieldName": "completed",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Inspection",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "inspectionPhoto",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "photo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "repair",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "repair",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "licensePlate",
+      "otherEntityName": "car",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "car",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "rental",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "rental",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

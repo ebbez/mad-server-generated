@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (rental(); as rentalRef) {
+      <div>
+        <h2 data-cy="rentalDetailsHeading"><span jhiTranslate="autoMaatApp.rental.detail.title">Rental</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ rentalRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.code">Code</span></dt>
+          <dd>
+            <span>{{ rentalRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ rentalRef.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ rentalRef.latitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.fromDate">From Date</span></dt>
+          <dd>
+            <span>{{ rentalRef.fromDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.toDate">To Date</span></dt>
+          <dd>
+            <span>{{ rentalRef.toDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.state">State</span></dt>
+          <dd>
+            <span [jhiTranslate]="'autoMaatApp.RentalState.' + (rentalRef.state ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', RESERVED: 'RESERVED', PICKUP: 'PICKUP', RETURNED: 'RETURNED' }[rentalRef.state ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.customer">Customer</span></dt>
+          <dd>
+            @if (rental()!.customer) {
+              <div>
+                <a [routerLink]="['/customer', rental()!.customer?.id, 'view']">{{ rentalRef.customer?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.rental.car">Car</span></dt>
+          <dd>
+            @if (rental()!.car) {
+              <div>
+                <a [routerLink]="['/car', rental()!.car?.id, 'view']">{{ rentalRef.car?.licensePlate }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/rental', rentalRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

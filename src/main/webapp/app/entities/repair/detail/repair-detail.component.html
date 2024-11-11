@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (repair(); as repairRef) {
+      <div>
+        <h2 data-cy="repairDetailsHeading"><span jhiTranslate="autoMaatApp.repair.detail.title">Repair</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ repairRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.description">Description</span></dt>
+          <dd>
+            <span>{{ repairRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.repairStatus">Repair Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'autoMaatApp.RepairStatus.' + (repairRef.repairStatus ?? 'null')">{{
+              { null: '', PLANNED: 'PLANNED', DOING: 'DOING', DONE: 'DONE', CANCELLED: 'CANCELLED' }[repairRef.repairStatus ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.dateCompleted">Date Completed</span></dt>
+          <dd>
+            <span>{{ repairRef.dateCompleted | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.car">Car</span></dt>
+          <dd>
+            @if (repair()!.car) {
+              <div>
+                <a [routerLink]="['/car', repair()!.car?.id, 'view']">{{ repairRef.car?.licensePlate }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.employee">Employee</span></dt>
+          <dd>
+            @if (repair()!.employee) {
+              <div>
+                <a [routerLink]="['/employee', repair()!.employee?.id, 'view']">{{ repairRef.employee?.lastName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.repair.inspection">Inspection</span></dt>
+          <dd>
+            @if (repair()!.inspection) {
+              <div>
+                <a [routerLink]="['/inspection', repair()!.inspection?.id, 'view']">{{ repairRef.inspection?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/repair', repairRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

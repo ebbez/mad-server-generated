@@ -1,0 +1,29 @@
+{
+  "autoMaatApp": {
+    "repair": {
+      "home": {
+        "title": "Repairs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Repair",
+        "createOrEditLabel": "Create or edit a Repair",
+        "notFound": "No Repairs found"
+      },
+      "created": "A new Repair is created with identifier {{ param }}",
+      "updated": "A Repair is updated with identifier {{ param }}",
+      "deleted": "A Repair is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Repair {{ id }}?"
+      },
+      "detail": {
+        "title": "Repair"
+      },
+      "id": "ID",
+      "description": "Description",
+      "repairStatus": "Repair Status",
+      "dateCompleted": "Date Completed",
+      "car": "Car",
+      "employee": "Employee",
+      "inspection": "Inspection"
+    }
+  }
+}

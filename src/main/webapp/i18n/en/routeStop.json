@@ -1,0 +1,26 @@
+{
+  "autoMaatApp": {
+    "routeStop": {
+      "home": {
+        "title": "Route Stops",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Route Stop",
+        "createOrEditLabel": "Create or edit a Route Stop",
+        "notFound": "No Route Stops found"
+      },
+      "created": "A new Route Stop is created with identifier {{ param }}",
+      "updated": "A Route Stop is updated with identifier {{ param }}",
+      "deleted": "A Route Stop is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Route Stop {{ id }}?"
+      },
+      "detail": {
+        "title": "Route Stop"
+      },
+      "id": "ID",
+      "nr": "Nr",
+      "routeFromTo": "Route From To",
+      "location": "Location"
+    }
+  }
+}

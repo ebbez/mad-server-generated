@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20241111085719"
+  },
+  "applications": ["AutoMaat"],
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "fromDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "toDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "RentalState",
+      "fieldValues": "ACTIVE,RESERVED,PICKUP,RETURNED"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Rental",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "rental",
+      "relationshipName": "inspection",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "rental",
+      "relationshipName": "customer",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "licensePlate",
+      "otherEntityName": "car",
+      "otherEntityRelationshipName": "rental",
+      "relationshipName": "car",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

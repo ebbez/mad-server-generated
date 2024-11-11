@@ -1,0 +1,197 @@
+<div>
+  <h2 id="page-heading" data-cy="InspectionHeading">
+    <span jhiTranslate="autoMaatApp.inspection.home.title">Inspections</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="autoMaatApp.inspection.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-inspection"
+        [routerLink]="['/inspection/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="autoMaatApp.inspection.home.createLabel">Create a new Inspection</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  @if (inspections?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="autoMaatApp.inspection.home.notFound">No Inspections found</span>
+    </div>
+  }
+
+  @if (inspections && inspections.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="odometer">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.odometer">Odometer</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="result">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.result">Result</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="photo">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.photo">Photo</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completed">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.completed">Completed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="car.licensePlate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.car">Car</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employee.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.employee">Employee</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rental.id">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.inspection.rental">Rental</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (inspection of inspections; track trackId(inspection)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/inspection', inspection.id, 'view']">{{ inspection.id }}</a>
+              </td>
+              <td>{{ inspection.code }}</td>
+              <td>{{ inspection.odometer }}</td>
+              <td>{{ inspection.result }}</td>
+              <td>{{ inspection.description }}</td>
+              <td>
+                @if (inspection.photo) {
+                  <a (click)="openFile(inspection.photo, inspection.photoContentType)">
+                    <img
+                      [src]="'data:' + inspection.photoContentType + ';base64,' + inspection.photo"
+                      style="max-height: 30px"
+                      alt="inspection"
+                    />
+                  </a>
+                  <span>{{ inspection.photoContentType }}, {{ byteSize(inspection.photo) }}</span>
+                }
+              </td>
+              <td>{{ inspection.completed | formatMediumDatetime }}</td>
+              <td>
+                @if (inspection.car) {
+                  <div>
+                    <a [routerLink]="['/car', inspection.car.id, 'view']">{{ inspection.car.licensePlate }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (inspection.employee) {
+                  <div>
+                    <a [routerLink]="['/employee', inspection.employee.id, 'view']">{{ inspection.employee.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (inspection.rental) {
+                  <div>
+                    <a [routerLink]="['/rental', inspection.rental.id, 'view']">{{ inspection.rental.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/inspection', inspection.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/inspection', inspection.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(inspection)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (inspections && inspections.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

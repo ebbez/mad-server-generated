@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-car-heading" data-cy="CarCreateUpdateHeading" jhiTranslate="autoMaatApp.car.home.createOrEditLabel">
+        Create or edit a Car
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="autoMaatApp.car.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_brand" jhiTranslate="autoMaatApp.car.brand">Brand</label>
+          <input type="text" class="form-control" name="brand" id="field_brand" data-cy="brand" formControlName="brand" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_model" jhiTranslate="autoMaatApp.car.model">Model</label>
+          <input type="text" class="form-control" name="model" id="field_model" data-cy="model" formControlName="model" />
+        </div>
+
+        @let pictureRef = editForm.get('picture')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_picture" jhiTranslate="autoMaatApp.car.picture">Picture</label>
+          <div>
+            @if (pictureRef.value) {
+              <img
+                [src]="'data:' + editForm.get('pictureContentType')!.value + ';base64,' + pictureRef.value"
+                style="max-height: 100px"
+                alt="car"
+              />
+            }
+            @if (pictureRef.value) {
+              <div class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('pictureContentType')!.value }}, {{ byteSize(pictureRef.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('picture', 'pictureContentType', 'file_picture')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_picture"
+              data-cy="picture"
+              (change)="setFileData($event, 'picture', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="picture" id="field_picture" data-cy="picture" formControlName="picture" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="pictureContentType"
+            id="field_pictureContentType"
+            formControlName="pictureContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuel" jhiTranslate="autoMaatApp.car.fuel">Fuel</label>
+          <select class="form-control" name="fuel" formControlName="fuel" id="field_fuel" data-cy="fuel">
+            <option [ngValue]="null">{{ 'autoMaatApp.Fuel.null' | translate }}</option>
+            @for (fuel of fuelValues; track $index) {
+              <option [value]="fuel">{{ 'autoMaatApp.Fuel.' + fuel | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_options" jhiTranslate="autoMaatApp.car.options">Options</label>
+          <input type="text" class="form-control" name="options" id="field_options" data-cy="options" formControlName="options" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_licensePlate" jhiTranslate="autoMaatApp.car.licensePlate">License Plate</label>
+          <input
+            type="text"
+            class="form-control"
+            name="licensePlate"
+            id="field_licensePlate"
+            data-cy="licensePlate"
+            formControlName="licensePlate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_engineSize" jhiTranslate="autoMaatApp.car.engineSize">Engine Size</label>
+          <input
+            type="number"
+            class="form-control"
+            name="engineSize"
+            id="field_engineSize"
+            data-cy="engineSize"
+            formControlName="engineSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_modelYear" jhiTranslate="autoMaatApp.car.modelYear">Model Year</label>
+          <input type="number" class="form-control" name="modelYear" id="field_modelYear" data-cy="modelYear" formControlName="modelYear" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_since" jhiTranslate="autoMaatApp.car.since">Since</label>
+          <div class="input-group">
+            <input
+              id="field_since"
+              data-cy="since"
+              type="text"
+              class="form-control"
+              name="since"
+              ngbDatepicker
+              #sinceDp="ngbDatepicker"
+              formControlName="since"
+            />
+            <button type="button" class="btn btn-secondary" (click)="sinceDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_price" jhiTranslate="autoMaatApp.car.price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nrOfSeats" jhiTranslate="autoMaatApp.car.nrOfSeats">Nr Of Seats</label>
+          <input type="number" class="form-control" name="nrOfSeats" id="field_nrOfSeats" data-cy="nrOfSeats" formControlName="nrOfSeats" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_body" jhiTranslate="autoMaatApp.car.body">Body</label>
+          <select class="form-control" name="body" formControlName="body" id="field_body" data-cy="body">
+            <option [ngValue]="null">{{ 'autoMaatApp.Body.null' | translate }}</option>
+            @for (body of bodyValues; track $index) {
+              <option [value]="body">{{ 'autoMaatApp.Body.' + body | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_longitude" jhiTranslate="autoMaatApp.car.longitude">Longitude</label>
+          <input type="number" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latitude" jhiTranslate="autoMaatApp.car.latitude">Latitude</label>
+          <input type="number" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
