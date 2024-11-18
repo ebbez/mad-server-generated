@@ -1,5 +1,93 @@
 # AutoMaat
 
+## Introductie
+
+Deze repository bevat de werkende code voor de Automaat backend applicatie voor het MAD 4e jaars keuzevak. Voor de geïntresseerden; het is een Java [Spring Boot](https://spring.io/projects/spring-boot) applicatie gegenereerd mbv [JHipster](https://www.jhipster.tech/). De applicatie bevat een volledig werkende front- en backend. De backend is door een REST API ontsloten en daar maken de studenten gebruik van. Deze API is volledig beschreven middels OpenAPI en de documentatie wordt door Swagger gepresenteerd en bevat voorbeelden die de student kan gebruiken.
+
+## Vereisten
+
+Om de code in deze repo te kunnen gebruiken heb je alleen maar een courante java JDK nodig. Het project is getest met Java 17. Om te zien welke versie je hebt kan je het volgende commando gebruiken:
+
+```bash
+# java --version
+openjdk version "17.0.13" 2024-10-15
+OpenJDK Runtime Environment (build 17.0.13+11)
+OpenJDK 64-Bit Server VM (build 17.0.13+11, mixed mode, sharing)
+```
+
+Het build systeem wat voor dit project gebruikt wordt is `maven` maar die hoef je niet te installeren. Maven is als wrapper meegeleverd met dit project en beschikbaar door vanuit de root van het project `./mvnw` aan te roepen.
+
+### Opstarten
+
+Om het systeem te runnen moet je eerst het project uit Github clonen:
+
+```bash
+# git clone https://github.com/hanze-hbo-ict/mad-server-generated.git
+```
+
+Vervolgens navigeer je naar de zojuist geclonede repo en start je de applicatie op:
+
+- Windows: `mvnw.cmd`
+- Linux/Mac: `./mvnw`
+
+Als alles goed is gegaan zie je nu aan het einde van het opstartproces iets als:
+
+```bash
+2024-11-18T12:55:06.153+01:00  INFO 58833 --- [  restartedMain] nl.hanze.se4.automaat.AutoMaatApp        :
+----------------------------------------------------------
+        Application 'AutoMaat' is running! Access URLs:
+        Local:          http://localhost:8080/
+        External:       http://127.0.1.1:8080/
+        Profile(s):     [dev, api-docs]
+----------------------------------------------------------
+```
+
+En kan je de applicatie openen door in je browser het de aangegeven url te navigeren.
+
+### Gebruikersregistratie
+
+In de backend zijn twee tabellen in gebruik voor de uiteindelijke gebruikers, `USER` en `CUSTOMER`.
+
+- De `USER` tabel wordt gebruikt voor de technische - of systeem gebruiker. Dit is het account waar de klant mee inlogt en is altijd aanwezig in een JHipster applicatie.
+- De `CUSTOMER` tabel is specifiek voor de Automaat applicatie en is de meer functionele plek voor klant gegevens
+
+In de api is er een endpoint beschikbaar voor het registreren van een nieuwe gebruiker. Standaard wordt in JHipster tijdens registratie (een POST op `.../api.register`) alleen maar een `USER` aangemaakt. De Automaat backend bevat een extra endpoint `.../api/AM/register` waarbij niet alleen een `USER` wordt aangemaakt, maar ook een `CUSTOMER` én de twee worden aan elkaar gekoppeld. Vanuit de te realiseren app kan je dit extra endpoint aanroepen. De volgende velden payload bevat de noodzakelijke velden en de structuur die je daarvoor kan gebruiken:
+
+```json
+{
+  "login": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "langKey": "string",
+  "password": "string"
+}
+```
+
+### Test data
+
+Tijdens het opstarten wordt er testdata in de database opgenomen. Deze testdata staat in `src/main/resources/config/liquibase/fake-data` en kan je aanpassen aan je eigen wensen.
+
+#### In memory
+
+De code zoals die in de repository zit is geconfigureerd voor een H2 in-memory database. Dit betekent dat, elke keer dat je de applicatie stopt en weer start, de data weer in zijn oorspronkelijke vorm aanwezig is (de fake-data). Al je eigen inserts/updates/deletes zijn weg. Dit kan handig zijn, zeker in het begin omdat je elke keer weer met een schone op kan starten.
+
+#### Gepersisteerd
+
+Wanneer je liever wilt dat je aanpassingen bewaard blijven kan je een aanpassing doen aan een van de Spring configuratie bestanden `src/main/resources/config/application-dev.yml`. Regel 40 bevat de 'in memory' variant. Om wijzigingen over stop/starten te behouden, zet je regel 40 in commentaat en haal je regel 41 uit commentaar.
+
+### Mail server
+
+De backend maakt gebruik van mail voor (o.a.) nieuwe registraties en wanneer je wachtwoorden bent vergeten. Om makkelijk de mail functionaliteit te kunnen gebruiken is er een docker compose file meegeleverd die een [MailDev](https://github.com/maildev/maildev) smtp server start en waarmee emails uit de backend onderschept en gelezen kunnen worden. Start deze server op middels het commando:
+
+```bash
+docker compose -f src/main/docker/maildev.yml up
+```
+
+Vervolgens navigeer je naar `http://localhost:1080/` om de mail via een webinterface te bekijken.
+
+## Hieronder de oorspronkelijke, door JHipster gegenereerde README
+
 This application was generated using JHipster 8.7.3, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.7.3](https://www.jhipster.tech/documentation-archive/v8.7.3).
 
 ## Project Structure
