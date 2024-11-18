@@ -1,11 +1,31 @@
-id;brand;model;picture;picture_content_type;fuel;options;license_plate;engine_size;model_year;since;price;nr_of_seats;body;longitude;latitude
-1;mid;till;../fake-data/blob/hipster.png;image/png;ELECTRIC;given faithfully;utilized;8298;9550;2024-11-10;19376.68;11200;SEDAN;2753.81;19019.44
-2;afore kindly huzzah;airport brightly alert;../fake-data/blob/hipster.png;image/png;HYBRID;violently;yum ugh;2998;26098;2024-11-11;19829.53;28587;TRUCK;3440.98;15510.72
-3;curl scary sure-footed;damp to ha;../fake-data/blob/hipster.png;image/png;HYBRID;behind;well until;16090;15275;2024-11-10;4682.36;30371;STATIONWAGON;27117.39;20997.08
-4;whoa save;spirited oof yuck;../fake-data/blob/hipster.png;image/png;ELECTRIC;present;er;624;31738;2024-11-10;18741.04;20139;SUV;23620.18;7341.08
-5;circa confound;aha bitterly;../fake-data/blob/hipster.png;image/png;ELECTRIC;except provided inquisitively;rosin profuse;9431;23375;2024-11-10;5897.6;25787;STATIONWAGON;20035.15;14973.5
-6;minus;glaring heating milestone;../fake-data/blob/hipster.png;image/png;ELECTRIC;opposite;regarding trash cap;16098;1287;2024-11-10;4536.02;27191;HATCHBACK;23851.35;481.53
-7;innocently blah;svelte;../fake-data/blob/hipster.png;image/png;DIESEL;badly energetically;circulate;24280;19848;2024-11-10;21681.05;20759;MPV;24773.7;24172.45
-8;serene shore;elegantly trim;../fake-data/blob/hipster.png;image/png;ELECTRIC;eek finally lest;whoever;20028;10654;2024-11-10;8472.22;9498;MINIVAN;13880.56;1184.18
-9;who;juvenile which blah;../fake-data/blob/hipster.png;image/png;DIESEL;contrail reach;mundane royal fork;20371;19875;2024-11-11;5509.2;31539;MPV;18596.73;10961.17
-10;urgently;superb rapidly;../fake-data/blob/hipster.png;image/png;HYBRID;gadzooks;warmhearted vista;7273;15607;2024-11-10;18442.93;31496;MINIVAN;5599.27;1853.56
+id;brand;model;picture;picture_content_type;fuel;options;license_plate;engine_size;model_year;since;price;nr_of_seats;body;latitude;longitude
+1;Toyota;Camry;../fake-data/pictures/toyota-camry.jpg;image/jpg;GASOLINE;Sunroof;ABC123;2.5;2022;2022-11-02;100;5;SEDAN;53.2383152;6.5349696
+2;Honda;CR-V;../fake-data/pictures/honda-crv.jpg;image/jpg;DIESEL;Leather Seats;DEF456;1.6;2021;2021-11-02;100;5;SUV;53.2383152;6.5349696
+3;Ford;F-150;../fake-data/pictures/ford-f150.jpg;image/jpg;GASOLINE;4x4;GHI789;5;2020;2020-11-02;100;5;TRUCK;53.2383152;6.5349696
+4;Chevrolet;Impala;../fake-data/pictures/chevrolet-impala.jpg;image/jpg;GASOLINE;Bluetooth;JKL012;3.6;2019;2019-11-02;100;5;SEDAN;53.2383152;6.5349696
+5;BMW;3 Series;../fake-data/pictures/bmw-3serie.jpg;image/jpg;GASOLINE;Navigation;MNO345;2;2023;2023-11-02;100;5;SEDAN;53.2383152;6.5349696
+6;Mercedes-Benz;E-Class;../fake-data/pictures/mercedes-eclass.jpg;image/jpg;DIESEL;Premium Sound;PQR678;3;2022;2022-11-02;100;5;SEDAN;53.2383152;6.5349696
+7;Toyota;RAV4 Hybrid;../fake-data/pictures/toyota-rav4.jpg;image/jpg;HYBRID;Backup Camera;STU901;2.5;2021;2021-11-02;100;5;SUV;53.2383152;6.5349696
+8;Audi;Q5;../fake-data/pictures/audi-q5.jpg;image/jpg;GASOLINE;Heated Seats;VWX234;2;2020;2020-11-02;100;5;SUV;53.2383152;6.5349696
+9;Jeep;Wrangler;../fake-data/pictures/jeep-wrangler.jpg;image/jpg;GASOLINE;Convertible;YZA567;3.6;2019;2019-11-02;100;5;SUV;53.2383152;6.5349696
+10;Nissan;Altima;../fake-data/pictures/nissan-altima.jpg;image/jpg;GASOLINE;Keyless Entry;BCD890;2.5;2023;2023-11-02;100;5;SEDAN;53.2383152;6.5349696
+11;Subaru;Outback;../fake-data/pictures/subaru-outback.jpg;image/jpg;GASOLINE;AWD;DEF123;2.5;2022;2022-11-02;100;5;STATIONWAGON;53.2383152;6.5349696
+12;Hyundai;Santa Fe;../fake-data/pictures/hyundai-santafe.jpg;image/jpg;GASOLINE;Apple CarPlay;GHI456;2.5;2021;2021-11-02;100;5;SUV;53.2383152;6.5349696
+13;Chevrolet;Traverse;../fake-data/pictures/chevrolet-traverse.jpg;image/jpg;HYBRID;Third Row Seating;JKL789;3.6;2020;2020-11-02;100;5;SUV;53.2383152;6.5349696
+14;Ford;Escape;../fake-data/pictures/ford-escape.jpg;image/jpg;GASOLINE;Blind Spot Monitoring;MNO012;2.5;2019;2019-11-02;100;5;SUV;53.2383152;6.5349696
+15;Honda;Civic;../fake-data/pictures/honda-civic.jpg;image/jpg;GASOLINE;Bluetooth;PQR345;1.8;2023;2023-11-02;100;5;SEDAN;53.2383152;6.5349696
+16;Toyota;Highlander;../fake-data/pictures/toyota-highlander.jpg;image/jpg;DIESEL;Leather Interior;STU678;2.5;2022;2022-11-02;100;5;SUV;53.2383152;6.5349696
+17;BMW;5 Series;../fake-data/pictures/bmw-5serie.jpg;image/jpg;GASOLINE;Heads-Up Display;VWX901;2;2021;2021-11-02;100;5;SEDAN;53.2383152;6.5349696
+18;Mercedes-Benz;GLC-Class;../fake-data/pictures/mercedes-glc.jpg;image/jpg;GASOLINE;Power Liftgate;YZA234;2;2020;2020-11-02;100;5;SUV;53.2383152;6.5349696
+19;Audi;A4;../fake-data/pictures/audi-a4.jpg;image/jpg;HYBRID;Virtual Cockpit;BCD567;2;2019;2019-11-02;100;5;SEDAN;53.2383152;6.5349696
+20;Nissan;Murano;../fake-data/pictures/nissan-murano.jpg;image/jpg;GASOLINE;Panoramic Roof;DEF890;3.5;2023;2023-11-02;100;5;SUV;53.2383152;6.5349696
+21;Subaru;Forester;../fake-data/pictures/subaru-forrester.jpg;image/jpg;GASOLINE;All-Weather Package;GHI123;2.5;2022;2022-11-02;100;5;SUV;53.2383152;6.5349696
+22;Jeep;Cherokee;../fake-data/pictures/jeep-cherokee.jpg;image/jpg;GASOLINE;Lane Departure Warning;JKL456;2.4;2021;2021-11-02;100;5;SUV;53.2383152;6.5349696
+23;Hyundai;Kona Electric;../fake-data/pictures/hyundai-kona.jpg;image/jpg;ELECTRIC;Wireless Charging;MNO789;64 kWh;2020;2020-11-02;100;5;SUV;53.2383152;6.5349696
+24;Chevrolet;Malibu;../fake-data/pictures/chevrolet-malibu.jpg;image/jpg;GASOLINE;Remote Start;PQR012;1.5;2019;2019-11-02;100;5;SEDAN;53.2383152;6.5349696
+25;Ford;Explorer;../fake-data/pictures/ford-explorer.jpg;image/jpg;DIESEL;7-Passenger Seating;STU345;3;2023;2023-11-02;100;5;SUV;53.2383152;6.5349696
+26;Honda;Fit;../fake-data/pictures/honda-fit.jpg;image/jpg;GASOLINE;Keyless Ignition;VWX678;1.5;2022;2022-11-02;100;5;HATCHBACK;53.2383152;6.5349696
+27;Toyota;4Runner;../fake-data/pictures/toyota-4runner.jpg;image/jpg;GASOLINE;Off-Road Package;YZA901;4;2021;2021-11-02;100;5;SUV;53.2383152;6.5349696
+28;BMW;7 Series;../fake-data/pictures/bmw-7serie.jpg;image/jpg;HYBRID;Massage Seats;BCD234;3;2020;2020-11-02;100;5;SEDAN;53.2383152;6.5349696
+29;Mercedes-Benz;A-Class;../fake-data/pictures/mercedes-aclass.jpg;image/jpg;GASOLINE;Wireless CarPlay;DEF567;2;2019;2019-11-02;100;5;SEDAN;53.2383152;6.5349696
+30;Audi;Q3;../fake-data/pictures/audi-q3.jpg;image/jpg;GASOLINE;Adaptive Cruise Control;GHI890;2;2023;2023-11-02;100;5;SUV;53.2383152;6.5349696

@@ -1,11 +1,52 @@
 id;street_address;postal_code;city;state_province
-1;likable;whereas badly;Hagenestown;doubtfully
-2;geez;naughty;Fort Vanessatown;mechanically for
-3;cruelly;once reluctantly certainly;Hoffman Estates;equate
-4;within;rebound barring whoa;New Billie;hefty discourse
-5;mosh;jogging;Fort Justusbury;great onto than
-6;physically blah enfold;vista;Sharonboro;surface
-7;buzzing qua;t-shirt perfumed;Hassiechester;simplistic hygienic
-8;now woot;of platypus outrank;West Elisabeth;fray lest interesting
-9;futon until overproduce;humiliating gadzooks;East Benfurt;nudge while
-10;glittering;who bourgeoisie;South Tyreekside;mid successfully until
+1;Keizersgracht 123;1015 CW;Amsterdam;Noord-Holland
+2;Prinsengracht 456;1016 HL;Amsterdam;Noord-Holland
+3;Herengracht 789;1017 DM;Amsterdam;Noord-Holland
+4;Singel 101;1012 VG;Amsterdam;Noord-Holland
+5;Nieuwezijds Voorburgwal 202;1012 SH;Amsterdam;Noord-Holland
+6;Leidseplein 303;1017 PS;Amsterdam;Noord-Holland
+7;Rembrandtplein 404;1017 CW;Amsterdam;Noord-Holland
+8;Museumplein 505;1071 DJ;Amsterdam;Noord-Holland
+9;Van Baerlestraat 606;1071 AX;Amsterdam;Noord-Holland
+10;Damstraat 707;1012 JL;Amsterdam;Noord-Holland
+11;Rokin 808;1012 KZ;Amsterdam;Noord-Holland
+12;Weteringschans 909;1017 RX;Amsterdam;Noord-Holland
+13;Elandsgracht 1010;1016 TX;Amsterdam;Noord-Holland
+14;Haarlemmerdijk 1111;1013 KE;Amsterdam;Noord-Holland
+15;Brouwersgracht 1212;1015 GG;Amsterdam;Noord-Holland
+16;Kerkstraat 1313;1017 GH;Amsterdam;Noord-Holland
+17;Utrechtsestraat 1414;1017 JJ;Amsterdam;Noord-Holland
+18;Beethovenstraat 1515;1077 WM;Amsterdam;Noord-Holland
+19;Albert Cuypstraat 1616;1072 CV;Amsterdam;Noord-Holland
+20;De Pijp 1717;1073 AK;Amsterdam;Noord-Holland
+21;De Wallen 1818;1012 RE;Amsterdam;Noord-Holland
+22;Jordaan 1919;1015 JH;Amsterdam;Noord-Holland
+23;De Plantage 2020;1018 CW;Amsterdam;Noord-Holland
+24;Nieuwendijk 2121;1012 MS;Amsterdam;Noord-Holland
+25;Zeedijk 2222;1012 AZ;Amsterdam;Noord-Holland
+26;Prins Hendrikkade 2323;1011 TH;Amsterdam;Noord-Holland
+27;Oudezijds Voorburgwal 2424;1012 GJ;Amsterdam;Noord-Holland
+28;Groningen 2525;9711 AP;Groningen;Groningen
+29;Rotterdam 2626;3011 AD;Rotterdam;Zuid-Holland
+30;Utrecht 2727;3512 JJ;Utrecht;Utrecht
+31;Den Haag 2828;2511 BJ;Den Haag;Zuid-Holland
+32;Eindhoven 2929;5611 AD;Eindhoven;Noord-Brabant
+33;Tilburg 3030;5038 AD;Tilburg;Noord-Brabant
+34;Almere 3131;1315 AG;Almere;Flevoland
+35;Groningen 3232;9711 AP;Groningen;Groningen
+36;Breda 3333;4811 AC;Breda;Noord-Brabant
+37;Nijmegen 3434;6511 RP;Nijmegen;Gelderland
+38;Enschede 3535;7511 JE;Enschede;Overijssel
+39;Apeldoorn 3636;7311 NC;Apeldoorn;Gelderland
+40;Haarlem 3737;2011 DK;Haarlem;Noord-Holland
+41;Amersfoort 3838;3811 AE;Amersfoort;Utrecht
+42;Zwolle 3939;8011 PP;Zwolle;Overijssel
+43;Roermond 4040;6041 LK;Roermond;Limburg
+44;Leiden 4141;2311 CP;Leiden;Zuid-Holland
+45;Leeuwarden 4242;8911 DN;Leeuwarden;Friesland
+46;Maastricht 4343;6211 DX;Maastricht;Limburg
+47;Dordrecht 4444;3311 WR;Dordrecht;Zuid-Holland
+48;Alkmaar 4545;1811 MZ;Alkmaar;Noord-Holland
+49;Emmen 4646;7811 AE;Emmen;Drenthe
+50;Assen 4747;9401 HS;Assen;Drenthe
+

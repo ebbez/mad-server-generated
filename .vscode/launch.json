@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-AutoMaatApp<auto-maat>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "nl.hanze.se4.automaat.AutoMaatApp",
+      "projectName": "auto-maat",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
