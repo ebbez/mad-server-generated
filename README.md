@@ -6,11 +6,11 @@ Deze repository bevat de werkende code voor de Automaat backend applicatie voor 
 
 ## Vereisten
 
-De backend kan op 2 manieren gedraaid worden: middels Docker Compose of natively via de Maven Wrapper.
+Voor het draaien van de backend en de mailserver kan Docker gebruikt worden om het geisoleerd te houden, of het kan natively/hybride gedraaid worden met de Maven Wrapper (`mvnw.cmd` bijvoorbeeld)
 
 ### Docker
 
-Om de backend met Docker op te zetten is Docker zelf nodig maar ook Docker Compose. Ook moet je de hele repository gecloned hebben en up-to-date.
+Om de backend met Docker op te zetten is Docker zelf nodig maar ook Docker Compose.
 
 ### Native
 
@@ -35,23 +35,32 @@ Om het systeem te runnen moet je eerst het project uit Github clonen:
 
 Vervolgens navigeer je naar de zojuist geclonede repo en start je de applicatie op met Docker of natively.
 
-### Docker
+### Alles met Docker
 
-Om de applicatie te starten met Docker kan je vervolgens de `docker-compose` (of soms `docker compose` zonder streepje) uitvoeren:
+Om de backend en maildev samen in 1x te starten/stoppen met Docker:
 
 ```bash
-docker-compose up -d # om de applicatie te starten
+# om de dev setup te starten:
+docker-compose up -d
 
-docker-compose down -d # om de applicatie te stoppen
+# wanneer je bestanden verandert aan de backend (in de src bijv):
+docker-compose up -d --force-recreate --build
+
+# om de dev setup te stoppen en containers te verwijderen:
+docker-compose down
+
+# om de dev setup te stoppen, containers incl. volume te verwijderen:
+docker-compose down -v
+# hierna is alles wel gereset en duurt de opvolgende run weer lang net als de eerste keer
 ```
 
 De eerste run zal langer duren omdat de Maven Wrapper (`./mvnw`) nog veel moet downloaden.
-Het kan daarom handiger zijn om de eerste run uit te voeren zonder te ontkoppelen (te detachen `-d`),
+Het kan daarom handiger zijn om de eerste run uit te voeren zonder te ontkoppelen (te 'detachen'; `-d`),
 om te zien of de installatie gaat zoals de bedoeling is.
 
-### Native met Maven Wrapper
+### Backend natively met Maven Wrapper
 
-Voer in de geclonede repo de volgende commando's uit:
+Om de backend apart natively op je computer te draaien moet je de volgende commando's in de geclonede repo uitvoeren:
 
 - Windows: `mvnw.cmd`
 - Linux/Mac: `./mvnw`
