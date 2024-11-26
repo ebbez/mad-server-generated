@@ -6,6 +6,14 @@ Deze repository bevat de werkende code voor de Automaat backend applicatie voor 
 
 ## Vereisten
 
+De backend kan op 2 manieren gedraaid worden: middels Docker Compose of natively via de Maven Wrapper.
+
+### Docker
+
+Om de backend met Docker op te zetten is Docker zelf nodig maar ook Docker Compose. Ook moet je de hele repository gecloned hebben en up-to-date.
+
+### Native
+
 Om de code in deze repo te kunnen gebruiken heb je alleen maar een courante java JDK nodig. Het project is getest met Java 17. Om te zien welke versie je hebt kan je het volgende commando gebruiken:
 
 ```bash
@@ -17,7 +25,7 @@ OpenJDK 64-Bit Server VM (build 17.0.13+11, mixed mode, sharing)
 
 Het build systeem wat voor dit project gebruikt wordt is `maven` maar die hoef je niet te installeren. Maven is als wrapper meegeleverd met dit project en beschikbaar door vanuit de root van het project `./mvnw` aan te roepen.
 
-### Opstarten
+## Opstarten
 
 Om het systeem te runnen moet je eerst het project uit Github clonen:
 
@@ -25,7 +33,25 @@ Om het systeem te runnen moet je eerst het project uit Github clonen:
 # git clone https://github.com/hanze-hbo-ict/mad-server-generated.git
 ```
 
-Vervolgens navigeer je naar de zojuist geclonede repo en start je de applicatie op:
+Vervolgens navigeer je naar de zojuist geclonede repo en start je de applicatie op met Docker of natively.
+
+### Docker
+
+Om de applicatie te starten met Docker kan je vervolgens de `docker-compose` (of soms `docker compose` zonder streepje) uitvoeren:
+
+```bash
+docker-compose up -d # om de applicatie te starten
+
+docker-compose down -d # om de applicatie te stoppen
+```
+
+De eerste run zal langer duren omdat de Maven Wrapper (`./mvnw`) nog veel moet downloaden.
+Het kan daarom handiger zijn om de eerste run uit te voeren zonder te ontkoppelen (te detachen `-d`),
+om te zien of de installatie gaat zoals de bedoeling is.
+
+### Native met Maven Wrapper
+
+Voer in de geclonede repo de volgende commando's uit:
 
 - Windows: `mvnw.cmd`
 - Linux/Mac: `./mvnw`
@@ -44,7 +70,7 @@ Als alles goed is gegaan zie je nu aan het einde van het opstartproces iets als:
 
 En kan je de applicatie openen door in je browser het de aangegeven url te navigeren.
 
-### Gebruikersregistratie
+## Gebruikersregistratie
 
 In de backend zijn twee tabellen in gebruik voor de uiteindelijke gebruikers, `USER` en `CUSTOMER`.
 
