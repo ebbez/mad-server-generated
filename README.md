@@ -30,7 +30,7 @@ Het build systeem wat voor dit project gebruikt wordt is `maven` maar die hoef j
 Om het systeem te runnen moet je eerst het project uit Github clonen:
 
 ```bash
-# git clone https://github.com/hanze-hbo-ict/mad-server-generated.git
+# git clone https://github.com/ebbez/mad-server-generated.git
 ```
 
 Vervolgens navigeer je naar de zojuist geclonede repo en start je de applicatie op met Docker of natively.
