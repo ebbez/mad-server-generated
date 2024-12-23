@@ -46,11 +46,11 @@ public class Rental implements Serializable {
     @JsonIgnoreProperties(value = { "photos", "repairs", "car", "employee", "rental" }, allowSetters = true)
     private Set<Inspection> inspections = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "systemUser", "rentals", "location" }, allowSetters = true)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "inspections", "repairs", "rentals" }, allowSetters = true)
     private Car car;
 

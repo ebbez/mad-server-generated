@@ -15,10 +15,10 @@
 
 logging:
   level:
-    ROOT: DEBUG
-    tech.jhipster: DEBUG
-    org.hibernate.SQL: DEBUG
-    nl.hanze.se4.automaat: DEBUG
+    ROOT: INFO
+    tech.jhipster: INFO
+    org.hibernate.SQL: INFO
+    nl.hanze.se4.automaat: INFO
 
 spring:
   devtools:
@@ -38,7 +38,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:AutoMaat;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
-    #    url: jdbc:h2:./automaat-h2:AutoMaat;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
+    #    url: jdbc:h2:file:./automaat-h2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
     username: AutoMaat
     password:
     hikari:
