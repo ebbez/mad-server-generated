@@ -2,7 +2,7 @@
 
 ## Introductie
 
-Deze repository bevat de werkende code voor de Automaat backend applicatie voor het MAD 4e jaars keuzevak. Voor de geïntresseerden; het is een Java [Spring Boot](https://spring.io/projects/spring-boot) applicatie gegenereerd mbv [JHipster](https://www.jhipster.tech/). De applicatie bevat een volledig werkende front- en backend. De backend is door een REST API ontsloten en daar maken de studenten gebruik van. Deze API is volledig beschreven middels OpenAPI en de documentatie wordt door Swagger gepresenteerd en bevat voorbeelden die de student kan gebruiken.
+Deze repository bevat de werkende code voor de Automaat backend applicatie voor het MAD 4e jaars keuzevak. Voor de geïntresseerden; het is een Java [Spring Boot](https://spring.io/projects/spring-boot) applicatie gegenereerd met behulp van [JHipster](https://www.jhipster.tech/). De applicatie bevat een volledig werkende front- en backend. De backend is door een REST API ontsloten en daar maken de studenten gebruik van. Deze API is volledig beschreven middels OpenAPI en de documentatie wordt door Swagger gepresenteerd en bevat voorbeelden die de student kan gebruiken. Als de applicatie draait en je bent ingelogd (admin/admin) kun je die documentatie vinden [via deze link](http://localhost:8080/admin/docs).
 
 ## Vereisten
 
@@ -77,7 +77,7 @@ Als alles goed is gegaan zie je nu aan het einde van het opstartproces iets als:
 ----------------------------------------------------------
 ```
 
-En kan je de applicatie openen door in je browser het de aangegeven url te navigeren.
+Nu kun je de applicatie openen door in je browser het de aangegeven url te navigeren.
 
 ## Gebruikersregistratie
 
@@ -86,7 +86,7 @@ In de backend zijn twee tabellen in gebruik voor de uiteindelijke gebruikers, `U
 - De `USER` tabel wordt gebruikt voor de technische - of systeem gebruiker. Dit is het account waar de klant mee inlogt en is altijd aanwezig in een JHipster applicatie.
 - De `CUSTOMER` tabel is specifiek voor de Automaat applicatie en is de meer functionele plek voor klant gegevens
 
-In de api is er een endpoint beschikbaar voor het registreren van een nieuwe gebruiker. Standaard wordt in JHipster tijdens registratie (een POST op `.../api.register`) alleen maar een `USER` aangemaakt. De Automaat backend bevat een extra endpoint `.../api/AM/register` waarbij niet alleen een `USER` wordt aangemaakt, maar ook een `CUSTOMER` én de twee worden aan elkaar gekoppeld. Vanuit de te realiseren app kan je dit extra endpoint aanroepen. De volgende velden payload bevat de noodzakelijke velden en de structuur die je daarvoor kan gebruiken:
+In de API is er een endpoint beschikbaar voor het registreren van een nieuwe gebruiker. Standaard wordt in JHipster tijdens registratie (een POST op `.../api.register`) alleen maar een `USER` aangemaakt. De Automaat backend bevat een extra endpoint `.../api/AM/register` waarbij niet alleen een `USER` wordt aangemaakt, maar ook een `CUSTOMER` én de twee worden aan elkaar gekoppeld. Vanuit de te realiseren app kan je dit extra endpoint aanroepen. De volgende velden payload bevat de noodzakelijke velden en de structuur die je daarvoor kan gebruiken:
 
 ```json
 {
@@ -99,21 +99,21 @@ In de api is er een endpoint beschikbaar voor het registreren van een nieuwe geb
 }
 ```
 
-### Test data
+### Testdata
 
 Tijdens het opstarten wordt er testdata in de database opgenomen. Deze testdata staat in `src/main/resources/config/liquibase/fake-data` en kan je aanpassen aan je eigen wensen.
 
-#### In memory
+#### In-memory database
 
 De code zoals die in de repository zit is geconfigureerd voor een H2 in-memory database. Dit betekent dat, elke keer dat je de applicatie stopt en weer start, de data weer in zijn oorspronkelijke vorm aanwezig is (de fake-data). Al je eigen inserts/updates/deletes zijn weg. Dit kan handig zijn, zeker in het begin omdat je elke keer weer met een schone op kan starten.
 
 #### Gepersisteerd
 
-Wanneer je liever wilt dat je aanpassingen bewaard blijven kan je een aanpassing doen aan een van de Spring configuratie bestanden `src/main/resources/config/application-dev.yml`. Regel 40 bevat de 'in memory' variant. Om wijzigingen over stop/starten te behouden, zet je regel 40 in commentaat en haal je regel 41 uit commentaar.
+Wanneer je liever wilt dat je aanpassingen bewaard blijven kan je een aanpassing doen aan één van de Spring configuratie bestanden: `src/main/resources/config/application-dev.yml`. Regel 40 bevat de 'in memory' variant. Om wijzigingen over stop/starten te behouden, zet je regel 40 in commentaat en haal je regel 41 uit commentaar.
 
 ### Mail server
 
-De backend maakt gebruik van mail voor (o.a.) nieuwe registraties en wanneer je wachtwoorden bent vergeten. Om makkelijk de mail functionaliteit te kunnen gebruiken is er een docker compose file meegeleverd die een [MailDev](https://github.com/maildev/maildev) smtp server start en waarmee emails uit de backend onderschept en gelezen kunnen worden. Start deze server op middels het commando:
+De backend maakt gebruik van mail voor (onder andere) nieuwe registraties en wanneer je wachtwoorden bent vergeten. Om makkelijk de mail-functionaliteit te kunnen gebruiken is er een docker compose file meegeleverd die een [MailDev](https://github.com/maildev/maildev) smtp server start waarmee emails uit de backend onderschept en gelezen kunnen worden. Start deze server op middels het commando:
 
 ```bash
 docker compose -f src/main/docker/maildev.yml up
