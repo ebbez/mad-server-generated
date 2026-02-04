@@ -51,12 +51,12 @@ describe('Customer Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call User query and add missing value', () => {
-      const customer: ICustomer = { id: 456 };
-      const systemUser: IUser = { id: 26649 };
+    it('should call User query and add missing value', () => {
+      const customer: ICustomer = { id: 21032 };
+      const systemUser: IUser = { id: 3944 };
       customer.systemUser = systemUser;
 
-      const userCollection: IUser[] = [{ id: 22895 }];
+      const userCollection: IUser[] = [{ id: 3944 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [systemUser];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -73,12 +73,12 @@ describe('Customer Management Update Component', () => {
       expect(comp.usersSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Location query and add missing value', () => {
-      const customer: ICustomer = { id: 456 };
-      const location: ILocation = { id: 13219 };
+    it('should call Location query and add missing value', () => {
+      const customer: ICustomer = { id: 21032 };
+      const location: ILocation = { id: 8454 };
       customer.location = location;
 
-      const locationCollection: ILocation[] = [{ id: 3827 }];
+      const locationCollection: ILocation[] = [{ id: 8454 }];
       jest.spyOn(locationService, 'query').mockReturnValue(of(new HttpResponse({ body: locationCollection })));
       const additionalLocations = [location];
       const expectedCollection: ILocation[] = [...additionalLocations, ...locationCollection];
@@ -95,27 +95,27 @@ describe('Customer Management Update Component', () => {
       expect(comp.locationsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const customer: ICustomer = { id: 456 };
-      const systemUser: IUser = { id: 24732 };
+    it('should update editForm', () => {
+      const customer: ICustomer = { id: 21032 };
+      const systemUser: IUser = { id: 3944 };
       customer.systemUser = systemUser;
-      const location: ILocation = { id: 26361 };
+      const location: ILocation = { id: 8454 };
       customer.location = location;
 
       activatedRoute.data = of({ customer });
       comp.ngOnInit();
 
-      expect(comp.usersSharedCollection).toContain(systemUser);
-      expect(comp.locationsSharedCollection).toContain(location);
+      expect(comp.usersSharedCollection).toContainEqual(systemUser);
+      expect(comp.locationsSharedCollection).toContainEqual(location);
       expect(comp.customer).toEqual(customer);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICustomer>>();
-      const customer = { id: 123 };
+      const customer = { id: 26915 };
       jest.spyOn(customerFormService, 'getCustomer').mockReturnValue(customer);
       jest.spyOn(customerService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -135,10 +135,10 @@ describe('Customer Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICustomer>>();
-      const customer = { id: 123 };
+      const customer = { id: 26915 };
       jest.spyOn(customerFormService, 'getCustomer').mockReturnValue({ id: null });
       jest.spyOn(customerService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -158,10 +158,10 @@ describe('Customer Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICustomer>>();
-      const customer = { id: 123 };
+      const customer = { id: 26915 };
       jest.spyOn(customerService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ customer });
@@ -181,9 +181,9 @@ describe('Customer Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareUser', () => {
-      it('Should forward to userService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to userService', () => {
+        const entity = { id: 3944 };
+        const entity2 = { id: 6275 };
         jest.spyOn(userService, 'compareUser');
         comp.compareUser(entity, entity2);
         expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
@@ -191,9 +191,9 @@ describe('Customer Management Update Component', () => {
     });
 
     describe('compareLocation', () => {
-      it('Should forward to locationService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to locationService', () => {
+        const entity = { id: 8454 };
+        const entity2 = { id: 13013 };
         jest.spyOn(locationService, 'compareLocation');
         comp.compareLocation(entity, entity2);
         expect(locationService.compareLocation).toHaveBeenCalledWith(entity, entity2);

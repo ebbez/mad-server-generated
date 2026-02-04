@@ -2,15 +2,13 @@ import { Component, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IInspectionPhoto } from '../inspection-photo.model';
 
 @Component({
-  standalone: true,
   selector: 'jhi-inspection-photo-detail',
   templateUrl: './inspection-photo-detail.component.html',
-  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe],
+  imports: [SharedModule, RouterModule],
 })
 export class InspectionPhotoDetailComponent {
   inspectionPhoto = input<IInspectionPhoto | null>(null);

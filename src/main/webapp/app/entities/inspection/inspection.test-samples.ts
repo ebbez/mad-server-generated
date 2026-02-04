@@ -3,24 +3,23 @@ import dayjs from 'dayjs/esm';
 import { IInspection, NewInspection } from './inspection.model';
 
 export const sampleWithRequiredData: IInspection = {
-  id: 9666,
+  id: 13424,
 };
 
 export const sampleWithPartialData: IInspection = {
-  id: 10307,
-  odometer: 31805,
-  description: 'mushy indeed yowza',
+  id: 29035,
+  code: 'shampoo',
 };
 
 export const sampleWithFullData: IInspection = {
-  id: 14011,
-  code: 'motor lifestyle',
-  odometer: 15649,
-  result: 'scratchy wallaby inwardly',
-  description: 'phooey writ',
+  id: 19872,
+  code: 'far-off',
+  odometer: 312,
+  result: 'abaft carelessly',
+  description: 'at',
   photo: '../fake-data/blob/hipster.png',
   photoContentType: 'unknown',
-  completed: dayjs('2024-11-10T09:28'),
+  completed: dayjs('2026-01-06T00:30'),
 };
 
 export const sampleWithNewData: NewInspection = {

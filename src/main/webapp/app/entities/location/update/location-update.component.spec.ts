@@ -43,8 +43,8 @@ describe('Location Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
-      const location: ILocation = { id: 456 };
+    it('should update editForm', () => {
+      const location: ILocation = { id: 13013 };
 
       activatedRoute.data = of({ location });
       comp.ngOnInit();
@@ -54,10 +54,10 @@ describe('Location Management Update Component', () => {
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ILocation>>();
-      const location = { id: 123 };
+      const location = { id: 8454 };
       jest.spyOn(locationFormService, 'getLocation').mockReturnValue(location);
       jest.spyOn(locationService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -77,10 +77,10 @@ describe('Location Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ILocation>>();
-      const location = { id: 123 };
+      const location = { id: 8454 };
       jest.spyOn(locationFormService, 'getLocation').mockReturnValue({ id: null });
       jest.spyOn(locationService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -100,10 +100,10 @@ describe('Location Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ILocation>>();
-      const location = { id: 123 };
+      const location = { id: 8454 };
       jest.spyOn(locationService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ location });

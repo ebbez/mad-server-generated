@@ -17,7 +17,6 @@ import { ICar } from '../car.model';
 import { CarFormGroup, CarFormService } from './car-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-car-update',
   templateUrl: './car-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

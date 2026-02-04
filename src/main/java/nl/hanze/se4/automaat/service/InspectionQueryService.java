@@ -66,52 +66,20 @@ public class InspectionQueryService extends QueryService<Inspection> {
         Specification<Inspection> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
-            if (criteria.getDistinct() != null) {
-                specification = specification.and(distinct(criteria.getDistinct()));
-            }
-            if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), Inspection_.id));
-            }
-            if (criteria.getCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCode(), Inspection_.code));
-            }
-            if (criteria.getOdometer() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getOdometer(), Inspection_.odometer));
-            }
-            if (criteria.getResult() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getResult(), Inspection_.result));
-            }
-            if (criteria.getDescription() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDescription(), Inspection_.description));
-            }
-            if (criteria.getCompleted() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCompleted(), Inspection_.completed));
-            }
-            if (criteria.getPhotoId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getPhotoId(), root -> root.join(Inspection_.photos, JoinType.LEFT).get(InspectionPhoto_.id))
-                );
-            }
-            if (criteria.getRepairId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getRepairId(), root -> root.join(Inspection_.repairs, JoinType.LEFT).get(Repair_.id))
-                );
-            }
-            if (criteria.getCarId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getCarId(), root -> root.join(Inspection_.car, JoinType.LEFT).get(Car_.id))
-                );
-            }
-            if (criteria.getEmployeeId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getEmployeeId(), root -> root.join(Inspection_.employee, JoinType.LEFT).get(Employee_.id))
-                );
-            }
-            if (criteria.getRentalId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getRentalId(), root -> root.join(Inspection_.rental, JoinType.LEFT).get(Rental_.id))
-                );
-            }
+            specification = Specification.allOf(
+                Boolean.TRUE.equals(criteria.getDistinct()) ? distinct(criteria.getDistinct()) : null,
+                buildRangeSpecification(criteria.getId(), Inspection_.id),
+                buildStringSpecification(criteria.getCode(), Inspection_.code),
+                buildRangeSpecification(criteria.getOdometer(), Inspection_.odometer),
+                buildStringSpecification(criteria.getResult(), Inspection_.result),
+                buildStringSpecification(criteria.getDescription(), Inspection_.description),
+                buildRangeSpecification(criteria.getCompleted(), Inspection_.completed),
+                buildSpecification(criteria.getPhotoId(), root -> root.join(Inspection_.photos, JoinType.LEFT).get(InspectionPhoto_.id)),
+                buildSpecification(criteria.getRepairId(), root -> root.join(Inspection_.repairs, JoinType.LEFT).get(Repair_.id)),
+                buildSpecification(criteria.getCarId(), root -> root.join(Inspection_.car, JoinType.LEFT).get(Car_.id)),
+                buildSpecification(criteria.getEmployeeId(), root -> root.join(Inspection_.employee, JoinType.LEFT).get(Employee_.id)),
+                buildSpecification(criteria.getRentalId(), root -> root.join(Inspection_.rental, JoinType.LEFT).get(Rental_.id))
+            );
         }
         return specification;
     }

@@ -59,7 +59,7 @@ describe('Customer Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ id: 26915 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +69,7 @@ describe('Customer Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ id: 21032 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -78,18 +78,18 @@ describe('Customer Management Component', () => {
       );
   });
 
-  it('Should call load all on init', () => {
+  it('should call load all on init', () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.customers?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.customers()[0]).toEqual(expect.objectContaining({ id: 26915 }));
   });
 
   describe('trackId', () => {
-    it('Should forward to customerService', () => {
-      const entity = { id: 123 };
+    it('should forward to customerService', () => {
+      const entity = { id: 26915 };
       jest.spyOn(service, 'getCustomerIdentifier');
       const id = comp.trackId(entity);
       expect(service.getCustomerIdentifier).toHaveBeenCalledWith(entity);

@@ -89,12 +89,12 @@ class EmployeeResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         employee = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedEmployee != null) {
             employeeRepository.delete(insertedEmployee);
             insertedEmployee = null;

@@ -8,7 +8,6 @@ import { IInspection } from '../inspection.model';
 import { InspectionService } from '../service/inspection.service';
 
 @Component({
-  standalone: true,
   templateUrl: './inspection-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

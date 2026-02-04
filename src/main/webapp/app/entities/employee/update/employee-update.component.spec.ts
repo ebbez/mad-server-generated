@@ -43,8 +43,8 @@ describe('Employee Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
-      const employee: IEmployee = { id: 456 };
+    it('should update editForm', () => {
+      const employee: IEmployee = { id: 1545 };
 
       activatedRoute.data = of({ employee });
       comp.ngOnInit();
@@ -54,10 +54,10 @@ describe('Employee Management Update Component', () => {
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEmployee>>();
-      const employee = { id: 123 };
+      const employee = { id: 1749 };
       jest.spyOn(employeeFormService, 'getEmployee').mockReturnValue(employee);
       jest.spyOn(employeeService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -77,10 +77,10 @@ describe('Employee Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEmployee>>();
-      const employee = { id: 123 };
+      const employee = { id: 1749 };
       jest.spyOn(employeeFormService, 'getEmployee').mockReturnValue({ id: null });
       jest.spyOn(employeeService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -100,10 +100,10 @@ describe('Employee Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IEmployee>>();
-      const employee = { id: 123 };
+      const employee = { id: 1749 };
       jest.spyOn(employeeService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ employee });

@@ -51,12 +51,12 @@ describe('RouteStop Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call RouteFromTo query and add missing value', () => {
-      const routeStop: IRouteStop = { id: 456 };
-      const routeFromTo: IRouteFromTo = { id: 18127 };
+    it('should call RouteFromTo query and add missing value', () => {
+      const routeStop: IRouteStop = { id: 4983 };
+      const routeFromTo: IRouteFromTo = { id: 23404 };
       routeStop.routeFromTo = routeFromTo;
 
-      const routeFromToCollection: IRouteFromTo[] = [{ id: 9823 }];
+      const routeFromToCollection: IRouteFromTo[] = [{ id: 23404 }];
       jest.spyOn(routeFromToService, 'query').mockReturnValue(of(new HttpResponse({ body: routeFromToCollection })));
       const additionalRouteFromTos = [routeFromTo];
       const expectedCollection: IRouteFromTo[] = [...additionalRouteFromTos, ...routeFromToCollection];
@@ -73,12 +73,12 @@ describe('RouteStop Management Update Component', () => {
       expect(comp.routeFromTosSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Location query and add missing value', () => {
-      const routeStop: IRouteStop = { id: 456 };
-      const location: ILocation = { id: 14568 };
+    it('should call Location query and add missing value', () => {
+      const routeStop: IRouteStop = { id: 4983 };
+      const location: ILocation = { id: 8454 };
       routeStop.location = location;
 
-      const locationCollection: ILocation[] = [{ id: 7756 }];
+      const locationCollection: ILocation[] = [{ id: 8454 }];
       jest.spyOn(locationService, 'query').mockReturnValue(of(new HttpResponse({ body: locationCollection })));
       const additionalLocations = [location];
       const expectedCollection: ILocation[] = [...additionalLocations, ...locationCollection];
@@ -95,27 +95,27 @@ describe('RouteStop Management Update Component', () => {
       expect(comp.locationsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const routeStop: IRouteStop = { id: 456 };
-      const routeFromTo: IRouteFromTo = { id: 20001 };
+    it('should update editForm', () => {
+      const routeStop: IRouteStop = { id: 4983 };
+      const routeFromTo: IRouteFromTo = { id: 23404 };
       routeStop.routeFromTo = routeFromTo;
-      const location: ILocation = { id: 15076 };
+      const location: ILocation = { id: 8454 };
       routeStop.location = location;
 
       activatedRoute.data = of({ routeStop });
       comp.ngOnInit();
 
-      expect(comp.routeFromTosSharedCollection).toContain(routeFromTo);
-      expect(comp.locationsSharedCollection).toContain(location);
+      expect(comp.routeFromTosSharedCollection).toContainEqual(routeFromTo);
+      expect(comp.locationsSharedCollection).toContainEqual(location);
       expect(comp.routeStop).toEqual(routeStop);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteStop>>();
-      const routeStop = { id: 123 };
+      const routeStop = { id: 6529 };
       jest.spyOn(routeStopFormService, 'getRouteStop').mockReturnValue(routeStop);
       jest.spyOn(routeStopService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -135,10 +135,10 @@ describe('RouteStop Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteStop>>();
-      const routeStop = { id: 123 };
+      const routeStop = { id: 6529 };
       jest.spyOn(routeStopFormService, 'getRouteStop').mockReturnValue({ id: null });
       jest.spyOn(routeStopService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -158,10 +158,10 @@ describe('RouteStop Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteStop>>();
-      const routeStop = { id: 123 };
+      const routeStop = { id: 6529 };
       jest.spyOn(routeStopService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ routeStop });
@@ -181,9 +181,9 @@ describe('RouteStop Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareRouteFromTo', () => {
-      it('Should forward to routeFromToService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to routeFromToService', () => {
+        const entity = { id: 23404 };
+        const entity2 = { id: 23435 };
         jest.spyOn(routeFromToService, 'compareRouteFromTo');
         comp.compareRouteFromTo(entity, entity2);
         expect(routeFromToService.compareRouteFromTo).toHaveBeenCalledWith(entity, entity2);
@@ -191,9 +191,9 @@ describe('RouteStop Management Update Component', () => {
     });
 
     describe('compareLocation', () => {
-      it('Should forward to locationService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to locationService', () => {
+        const entity = { id: 8454 };
+        const entity2 = { id: 13013 };
         jest.spyOn(locationService, 'compareLocation');
         comp.compareLocation(entity, entity2);
         expect(locationService.compareLocation).toHaveBeenCalledWith(entity, entity2);

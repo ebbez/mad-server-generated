@@ -16,7 +16,6 @@ import { IRouteStop } from '../route-stop.model';
 import { RouteStopFormGroup, RouteStopFormService } from './route-stop-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-route-stop-update',
   templateUrl: './route-stop-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

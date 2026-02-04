@@ -47,12 +47,12 @@ describe('RouteFromTo Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Employee query and add missing value', () => {
-      const routeFromTo: IRouteFromTo = { id: 456 };
-      const employee: IEmployee = { id: 17740 };
+    it('should call Employee query and add missing value', () => {
+      const routeFromTo: IRouteFromTo = { id: 23435 };
+      const employee: IEmployee = { id: 1749 };
       routeFromTo.employee = employee;
 
-      const employeeCollection: IEmployee[] = [{ id: 11008 }];
+      const employeeCollection: IEmployee[] = [{ id: 1749 }];
       jest.spyOn(employeeService, 'query').mockReturnValue(of(new HttpResponse({ body: employeeCollection })));
       const additionalEmployees = [employee];
       const expectedCollection: IEmployee[] = [...additionalEmployees, ...employeeCollection];
@@ -69,24 +69,24 @@ describe('RouteFromTo Management Update Component', () => {
       expect(comp.employeesSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const routeFromTo: IRouteFromTo = { id: 456 };
-      const employee: IEmployee = { id: 32646 };
+    it('should update editForm', () => {
+      const routeFromTo: IRouteFromTo = { id: 23435 };
+      const employee: IEmployee = { id: 1749 };
       routeFromTo.employee = employee;
 
       activatedRoute.data = of({ routeFromTo });
       comp.ngOnInit();
 
-      expect(comp.employeesSharedCollection).toContain(employee);
+      expect(comp.employeesSharedCollection).toContainEqual(employee);
       expect(comp.routeFromTo).toEqual(routeFromTo);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteFromTo>>();
-      const routeFromTo = { id: 123 };
+      const routeFromTo = { id: 23404 };
       jest.spyOn(routeFromToFormService, 'getRouteFromTo').mockReturnValue(routeFromTo);
       jest.spyOn(routeFromToService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -106,10 +106,10 @@ describe('RouteFromTo Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteFromTo>>();
-      const routeFromTo = { id: 123 };
+      const routeFromTo = { id: 23404 };
       jest.spyOn(routeFromToFormService, 'getRouteFromTo').mockReturnValue({ id: null });
       jest.spyOn(routeFromToService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -129,10 +129,10 @@ describe('RouteFromTo Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRouteFromTo>>();
-      const routeFromTo = { id: 123 };
+      const routeFromTo = { id: 23404 };
       jest.spyOn(routeFromToService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ routeFromTo });
@@ -152,9 +152,9 @@ describe('RouteFromTo Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareEmployee', () => {
-      it('Should forward to employeeService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to employeeService', () => {
+        const entity = { id: 1749 };
+        const entity2 = { id: 1545 };
         jest.spyOn(employeeService, 'compareEmployee');
         comp.compareEmployee(entity, entity2);
         expect(employeeService.compareEmployee).toHaveBeenCalledWith(entity, entity2);

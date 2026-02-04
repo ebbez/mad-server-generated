@@ -7,7 +7,9 @@ import java.util.Objects;
 import java.util.Optional;
 import nl.hanze.se4.automaat.domain.Car;
 import nl.hanze.se4.automaat.repository.CarRepository;
+import nl.hanze.se4.automaat.service.CarQueryService;
 import nl.hanze.se4.automaat.service.CarService;
+import nl.hanze.se4.automaat.service.criteria.CarCriteria;
 import nl.hanze.se4.automaat.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +42,12 @@ public class CarResource {
 
     private final CarRepository carRepository;
 
-    public CarResource(CarService carService, CarRepository carRepository) {
+    private final CarQueryService carQueryService;
+
+    public CarResource(CarService carService, CarRepository carRepository, CarQueryService carQueryService) {
         this.carService = carService;
         this.carRepository = carRepository;
+        this.carQueryService = carQueryService;
     }
 
     /**
@@ -133,14 +138,28 @@ public class CarResource {
      * {@code GET  /cars} : get all the cars.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cars in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Car>> getAllCars(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-        LOG.debug("REST request to get a page of Cars");
-        Page<Car> page = carService.findAll(pageable);
+    public ResponseEntity<List<Car>> getAllCars(CarCriteria criteria, @org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+        LOG.debug("REST request to get Cars by criteria: {}", criteria);
+
+        Page<Car> page = carQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /cars/count} : count all the cars.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/count")
+    public ResponseEntity<Long> countCars(CarCriteria criteria) {
+        LOG.debug("REST request to count Cars by criteria: {}", criteria);
+        return ResponseEntity.ok().body(carQueryService.countByCriteria(criteria));
     }
 
     /**

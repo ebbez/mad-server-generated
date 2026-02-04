@@ -8,7 +8,6 @@ import { IRental } from '../rental.model';
 import { RentalService } from '../service/rental.service';
 
 @Component({
-  standalone: true,
   templateUrl: './rental-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

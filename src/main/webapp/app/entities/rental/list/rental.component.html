@@ -20,23 +20,21 @@
     </div>
   </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error />
 
-  <jhi-alert></jhi-alert>
+  <jhi-alert />
 
-  <jhi-filter [filters]="filters"></jhi-filter>
+  <jhi-filter [filters]="filters" />
 
-  @if (rentals?.length === 0) {
+  @if (rentals().length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="autoMaatApp.rental.home.notFound">No Rentals found</span>
     </div>
-  }
-
-  @if (rentals && rentals.length > 0) {
+  } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -102,7 +100,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (rental of rentals; track trackId(rental)) {
+          @for (rental of rentals(); track trackId(rental)) {
             <tr data-cy="entityTable">
               <td>
                 <a [routerLink]="['/rental', rental.id, 'view']">{{ rental.id }}</a>
@@ -168,10 +166,10 @@
       </table>
     </div>
   }
-  @if (rentals && rentals.length > 0) {
+  @if (rentals().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
       </div>
 
       <div class="d-flex justify-content-center">

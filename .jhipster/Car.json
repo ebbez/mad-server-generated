@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20241111085619"
+    "changelogDate": "20260106144438"
   },
   "applications": ["AutoMaat"],
   "fields": [
@@ -63,6 +63,7 @@
       "fieldType": "Float"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "Car",
   "pagination": "pagination",
   "relationships": [
@@ -70,6 +71,13 @@
       "otherEntityName": "inspection",
       "otherEntityRelationshipName": "car",
       "relationshipName": "inspection",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "carReview",
+      "otherEntityRelationshipName": "car",
+      "relationshipName": "review",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },

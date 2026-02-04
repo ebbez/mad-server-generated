@@ -19,11 +19,13 @@
       },
       "id": "ID",
       "nr": "Nr",
+      "licenseChecked": "License Checked",
       "lastName": "Last Name",
       "firstName": "First Name",
       "from": "From",
       "systemUser": "System User",
       "rental": "Rental",
+      "review": "Review",
       "location": "Location"
     }
   }

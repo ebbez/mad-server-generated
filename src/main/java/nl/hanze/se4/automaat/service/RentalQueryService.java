@@ -66,46 +66,19 @@ public class RentalQueryService extends QueryService<Rental> {
         Specification<Rental> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
-            if (criteria.getDistinct() != null) {
-                specification = specification.and(distinct(criteria.getDistinct()));
-            }
-            if (criteria.getId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getId(), Rental_.id));
-            }
-            if (criteria.getCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCode(), Rental_.code));
-            }
-            if (criteria.getLongitude() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLongitude(), Rental_.longitude));
-            }
-            if (criteria.getLatitude() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getLatitude(), Rental_.latitude));
-            }
-            if (criteria.getFromDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getFromDate(), Rental_.fromDate));
-            }
-            if (criteria.getToDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getToDate(), Rental_.toDate));
-            }
-            if (criteria.getState() != null) {
-                specification = specification.and(buildSpecification(criteria.getState(), Rental_.state));
-            }
-            if (criteria.getInspectionId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getInspectionId(), root -> root.join(Rental_.inspections, JoinType.LEFT).get(Inspection_.id)
-                    )
-                );
-            }
-            if (criteria.getCustomerId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getCustomerId(), root -> root.join(Rental_.customer, JoinType.LEFT).get(Customer_.id))
-                );
-            }
-            if (criteria.getCarId() != null) {
-                specification = specification.and(
-                    buildSpecification(criteria.getCarId(), root -> root.join(Rental_.car, JoinType.LEFT).get(Car_.id))
-                );
-            }
+            specification = Specification.allOf(
+                Boolean.TRUE.equals(criteria.getDistinct()) ? distinct(criteria.getDistinct()) : null,
+                buildRangeSpecification(criteria.getId(), Rental_.id),
+                buildStringSpecification(criteria.getCode(), Rental_.code),
+                buildRangeSpecification(criteria.getLongitude(), Rental_.longitude),
+                buildRangeSpecification(criteria.getLatitude(), Rental_.latitude),
+                buildRangeSpecification(criteria.getFromDate(), Rental_.fromDate),
+                buildRangeSpecification(criteria.getToDate(), Rental_.toDate),
+                buildSpecification(criteria.getState(), Rental_.state),
+                buildSpecification(criteria.getInspectionId(), root -> root.join(Rental_.inspections, JoinType.LEFT).get(Inspection_.id)),
+                buildSpecification(criteria.getCustomerId(), root -> root.join(Rental_.customer, JoinType.LEFT).get(Customer_.id)),
+                buildSpecification(criteria.getCarId(), root -> root.join(Rental_.car, JoinType.LEFT).get(Car_.id))
+            );
         }
         return specification;
     }

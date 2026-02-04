@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -6,7 +6,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
@@ -17,24 +16,13 @@ import { EntityArrayResponseType, RouteStopService } from '../service/route-stop
 import { RouteStopDeleteDialogComponent } from '../delete/route-stop-delete-dialog.component';
 
 @Component({
-  standalone: true,
   selector: 'jhi-route-stop',
   templateUrl: './route-stop.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-    ItemCountComponent,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ItemCountComponent],
 })
 export class RouteStopComponent implements OnInit {
   subscription: Subscription | null = null;
-  routeStops?: IRouteStop[];
+  routeStops = signal<IRouteStop[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -98,7 +86,7 @@ export class RouteStopComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.routeStops = dataFromBody;
+    this.routeStops.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(data: IRouteStop[] | null): IRouteStop[] {

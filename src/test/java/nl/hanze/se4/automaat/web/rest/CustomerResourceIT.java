@@ -47,6 +47,9 @@ class CustomerResourceIT {
     private static final Integer DEFAULT_NR = 1;
     private static final Integer UPDATED_NR = 2;
 
+    private static final Boolean DEFAULT_LICENSE_CHECKED = false;
+    private static final Boolean UPDATED_LICENSE_CHECKED = true;
+
     private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
 
@@ -94,7 +97,12 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createEntity() {
-        return new Customer().nr(DEFAULT_NR).lastName(DEFAULT_LAST_NAME).firstName(DEFAULT_FIRST_NAME).from(DEFAULT_FROM);
+        return new Customer()
+            .nr(DEFAULT_NR)
+            .licenseChecked(DEFAULT_LICENSE_CHECKED)
+            .lastName(DEFAULT_LAST_NAME)
+            .firstName(DEFAULT_FIRST_NAME)
+            .from(DEFAULT_FROM);
     }
 
     /**
@@ -104,16 +112,21 @@ class CustomerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Customer createUpdatedEntity() {
-        return new Customer().nr(UPDATED_NR).lastName(UPDATED_LAST_NAME).firstName(UPDATED_FIRST_NAME).from(UPDATED_FROM);
+        return new Customer()
+            .nr(UPDATED_NR)
+            .licenseChecked(UPDATED_LICENSE_CHECKED)
+            .lastName(UPDATED_LAST_NAME)
+            .firstName(UPDATED_FIRST_NAME)
+            .from(UPDATED_FROM);
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         customer = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedCustomer != null) {
             customerRepository.delete(insertedCustomer);
             insertedCustomer = null;
@@ -172,6 +185,7 @@ class CustomerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
             .andExpect(jsonPath("$.[*].nr").value(hasItem(DEFAULT_NR)))
+            .andExpect(jsonPath("$.[*].licenseChecked").value(hasItem(DEFAULT_LICENSE_CHECKED)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].from").value(hasItem(DEFAULT_FROM.toString())));
@@ -207,6 +221,7 @@ class CustomerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
             .andExpect(jsonPath("$.nr").value(DEFAULT_NR))
+            .andExpect(jsonPath("$.licenseChecked").value(DEFAULT_LICENSE_CHECKED))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.from").value(DEFAULT_FROM.toString()));
@@ -231,7 +246,12 @@ class CustomerResourceIT {
         Customer updatedCustomer = customerRepository.findById(customer.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedCustomer are not directly saved in db
         em.detach(updatedCustomer);
-        updatedCustomer.nr(UPDATED_NR).lastName(UPDATED_LAST_NAME).firstName(UPDATED_FIRST_NAME).from(UPDATED_FROM);
+        updatedCustomer
+            .nr(UPDATED_NR)
+            .licenseChecked(UPDATED_LICENSE_CHECKED)
+            .lastName(UPDATED_LAST_NAME)
+            .firstName(UPDATED_FIRST_NAME)
+            .from(UPDATED_FROM);
 
         restCustomerMockMvc
             .perform(
@@ -309,7 +329,7 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.lastName(UPDATED_LAST_NAME).firstName(UPDATED_FIRST_NAME).from(UPDATED_FROM);
+        partialUpdatedCustomer.licenseChecked(UPDATED_LICENSE_CHECKED).lastName(UPDATED_LAST_NAME).firstName(UPDATED_FIRST_NAME);
 
         restCustomerMockMvc
             .perform(
@@ -337,7 +357,12 @@ class CustomerResourceIT {
         Customer partialUpdatedCustomer = new Customer();
         partialUpdatedCustomer.setId(customer.getId());
 
-        partialUpdatedCustomer.nr(UPDATED_NR).lastName(UPDATED_LAST_NAME).firstName(UPDATED_FIRST_NAME).from(UPDATED_FROM);
+        partialUpdatedCustomer
+            .nr(UPDATED_NR)
+            .licenseChecked(UPDATED_LICENSE_CHECKED)
+            .lastName(UPDATED_LAST_NAME)
+            .firstName(UPDATED_FIRST_NAME)
+            .from(UPDATED_FROM);
 
         restCustomerMockMvc
             .perform(

@@ -51,12 +51,12 @@ describe('Rental Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Customer query and add missing value', () => {
-      const rental: IRental = { id: 456 };
-      const customer: ICustomer = { id: 27219 };
+    it('should call Customer query and add missing value', () => {
+      const rental: IRental = { id: 17269 };
+      const customer: ICustomer = { id: 26915 };
       rental.customer = customer;
 
-      const customerCollection: ICustomer[] = [{ id: 19230 }];
+      const customerCollection: ICustomer[] = [{ id: 26915 }];
       jest.spyOn(customerService, 'query').mockReturnValue(of(new HttpResponse({ body: customerCollection })));
       const additionalCustomers = [customer];
       const expectedCollection: ICustomer[] = [...additionalCustomers, ...customerCollection];
@@ -73,12 +73,12 @@ describe('Rental Management Update Component', () => {
       expect(comp.customersSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Car query and add missing value', () => {
-      const rental: IRental = { id: 456 };
-      const car: ICar = { id: 25930 };
+    it('should call Car query and add missing value', () => {
+      const rental: IRental = { id: 17269 };
+      const car: ICar = { id: 30624 };
       rental.car = car;
 
-      const carCollection: ICar[] = [{ id: 14488 }];
+      const carCollection: ICar[] = [{ id: 30624 }];
       jest.spyOn(carService, 'query').mockReturnValue(of(new HttpResponse({ body: carCollection })));
       const additionalCars = [car];
       const expectedCollection: ICar[] = [...additionalCars, ...carCollection];
@@ -92,27 +92,27 @@ describe('Rental Management Update Component', () => {
       expect(comp.carsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const rental: IRental = { id: 456 };
-      const customer: ICustomer = { id: 16460 };
+    it('should update editForm', () => {
+      const rental: IRental = { id: 17269 };
+      const customer: ICustomer = { id: 26915 };
       rental.customer = customer;
-      const car: ICar = { id: 30230 };
+      const car: ICar = { id: 30624 };
       rental.car = car;
 
       activatedRoute.data = of({ rental });
       comp.ngOnInit();
 
-      expect(comp.customersSharedCollection).toContain(customer);
-      expect(comp.carsSharedCollection).toContain(car);
+      expect(comp.customersSharedCollection).toContainEqual(customer);
+      expect(comp.carsSharedCollection).toContainEqual(car);
       expect(comp.rental).toEqual(rental);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRental>>();
-      const rental = { id: 123 };
+      const rental = { id: 12599 };
       jest.spyOn(rentalFormService, 'getRental').mockReturnValue(rental);
       jest.spyOn(rentalService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -132,10 +132,10 @@ describe('Rental Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRental>>();
-      const rental = { id: 123 };
+      const rental = { id: 12599 };
       jest.spyOn(rentalFormService, 'getRental').mockReturnValue({ id: null });
       jest.spyOn(rentalService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -155,10 +155,10 @@ describe('Rental Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRental>>();
-      const rental = { id: 123 };
+      const rental = { id: 12599 };
       jest.spyOn(rentalService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ rental });
@@ -178,9 +178,9 @@ describe('Rental Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareCustomer', () => {
-      it('Should forward to customerService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to customerService', () => {
+        const entity = { id: 26915 };
+        const entity2 = { id: 21032 };
         jest.spyOn(customerService, 'compareCustomer');
         comp.compareCustomer(entity, entity2);
         expect(customerService.compareCustomer).toHaveBeenCalledWith(entity, entity2);
@@ -188,9 +188,9 @@ describe('Rental Management Update Component', () => {
     });
 
     describe('compareCar', () => {
-      it('Should forward to carService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to carService', () => {
+        const entity = { id: 30624 };
+        const entity2 = { id: 14019 };
         jest.spyOn(carService, 'compareCar');
         comp.compareCar(entity, entity2);
         expect(carService.compareCar).toHaveBeenCalledWith(entity, entity2);

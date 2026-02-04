@@ -11,6 +11,7 @@ import { Account } from 'app/core/auth/account.model';
 import HasAnyAuthorityDirective from './has-any-authority.directive';
 
 @Component({
+  imports: [HasAnyAuthorityDirective],
   template: ` <div *jhiHasAnyAuthority="'ROLE_ADMIN'" #content></div> `,
 })
 class TestHasAnyAuthorityDirectiveComponent {
@@ -23,8 +24,7 @@ describe('HasAnyAuthorityDirective tests', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HasAnyAuthorityDirective, TranslateModule.forRoot()],
-      declarations: [TestHasAnyAuthorityDirectiveComponent],
+      imports: [TestHasAnyAuthorityDirectiveComponent, TranslateModule.forRoot()],
       providers: [provideHttpClient(), AccountService],
     });
   }));
@@ -41,7 +41,6 @@ describe('HasAnyAuthorityDirective tests', () => {
       mockAccountService.hasAnyAuthority = jest.fn(() => true);
       const fixture = TestBed.createComponent(TestHasAnyAuthorityDirectiveComponent);
       const comp = fixture.componentInstance;
-      fixture.detectChanges();
 
       // WHEN
       fixture.detectChanges();
@@ -55,7 +54,6 @@ describe('HasAnyAuthorityDirective tests', () => {
       mockAccountService.hasAnyAuthority = jest.fn(() => false);
       const fixture = TestBed.createComponent(TestHasAnyAuthorityDirectiveComponent);
       const comp = fixture.componentInstance;
-      fixture.detectChanges();
 
       // WHEN
       fixture.detectChanges();
@@ -71,7 +69,6 @@ describe('HasAnyAuthorityDirective tests', () => {
       mockAccountService.hasAnyAuthority = jest.fn((): boolean => Boolean(currentAccount()));
       const fixture = TestBed.createComponent(TestHasAnyAuthorityDirectiveComponent);
       const comp = fixture.componentInstance;
-      fixture.detectChanges();
 
       // WHEN
       fixture.detectChanges();

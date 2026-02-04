@@ -62,6 +62,9 @@ public class CustomerService {
                 if (customer.getNr() != null) {
                     existingCustomer.setNr(customer.getNr());
                 }
+                if (customer.getLicenseChecked() != null) {
+                    existingCustomer.setLicenseChecked(customer.getLicenseChecked());
+                }
                 if (customer.getLastName() != null) {
                     existingCustomer.setLastName(customer.getLastName());
                 }

@@ -36,13 +36,7 @@ export default tseslint.config(
         project: ['./tsconfig.app.json', './tsconfig.spec.json'],
       },
     },
-    processor: {
-      // https://github.com/angular-eslint/angular-eslint/issues/1917
-      meta: {
-        name: 'extract-inline-html',
-      },
-      ...angular.processInlineTemplates,
-    },
+    processor: angular.processInlineTemplates,
     rules: {
       '@angular-eslint/component-selector': [
         'error',
@@ -88,6 +82,7 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-extraneous-class': 'off',
+      '@typescript-eslint/no-misused-spread': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-shadow': ['error'],
@@ -126,13 +121,15 @@ export default tseslint.config(
   {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
-    rules: {},
+    rules: {
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off',
+    },
   },
+  // jhipster-needle-eslint-add-config - JHipster will add additional config here
   {
-    // Html templates requires some work
+    // Html templates require some work
     ignores: ['**/*.html'],
     extends: [prettier],
   },
-  // jhipster-needle-eslint-add-config - JHipster will add additional config here
-  prettier,
 );

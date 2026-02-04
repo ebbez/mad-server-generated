@@ -1,17 +1,17 @@
 import { IInspectionPhoto, NewInspectionPhoto } from './inspection-photo.model';
 
 export const sampleWithRequiredData: IInspectionPhoto = {
-  id: 15993,
+  id: 20027,
 };
 
 export const sampleWithPartialData: IInspectionPhoto = {
-  id: 26715,
+  id: 29744,
   photo: '../fake-data/blob/hipster.png',
   photoContentType: 'unknown',
 };
 
 export const sampleWithFullData: IInspectionPhoto = {
-  id: 4308,
+  id: 13405,
   photo: '../fake-data/blob/hipster.png',
   photoContentType: 'unknown',
 };

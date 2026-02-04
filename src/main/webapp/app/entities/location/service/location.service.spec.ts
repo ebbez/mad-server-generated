@@ -155,7 +155,7 @@ describe('Location Service', () => {
     });
 
     describe('compareLocation', () => {
-      it('Should return true if both entities are null', () => {
+      it('should return true if both entities are null', () => {
         const entity1 = null;
         const entity2 = null;
 
@@ -164,8 +164,8 @@ describe('Location Service', () => {
         expect(compareResult).toEqual(true);
       });
 
-      it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+      it('should return false if one entity is null', () => {
+        const entity1 = { id: 8454 };
         const entity2 = null;
 
         const compareResult1 = service.compareLocation(entity1, entity2);
@@ -175,9 +175,9 @@ describe('Location Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should return false if primaryKey differs', () => {
+        const entity1 = { id: 8454 };
+        const entity2 = { id: 13013 };
 
         const compareResult1 = service.compareLocation(entity1, entity2);
         const compareResult2 = service.compareLocation(entity2, entity1);
@@ -186,9 +186,9 @@ describe('Location Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+      it('should return false if primaryKey matches', () => {
+        const entity1 = { id: 8454 };
+        const entity2 = { id: 8454 };
 
         const compareResult1 = service.compareLocation(entity1, entity2);
         const compareResult2 = service.compareLocation(entity2, entity1);

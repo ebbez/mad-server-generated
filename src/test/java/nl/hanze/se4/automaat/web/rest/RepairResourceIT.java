@@ -102,12 +102,12 @@ class RepairResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         repair = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedRepair != null) {
             repairRepository.delete(insertedRepair);
             insertedRepair = null;

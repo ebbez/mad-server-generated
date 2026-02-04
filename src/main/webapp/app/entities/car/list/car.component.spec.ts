@@ -32,6 +32,7 @@ describe('Car Management Component', () => {
                 page: '1',
                 size: '1',
                 sort: 'id,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             ),
             snapshot: {
@@ -40,6 +41,7 @@ describe('Car Management Component', () => {
                 page: '1',
                 size: '1',
                 sort: 'id,desc',
+                'filter[someId.in]': 'dc4279ea-cfb9-11ec-9d64-0242ac120002',
               }),
             },
           },
@@ -59,7 +61,7 @@ describe('Car Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ id: 30624 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -69,7 +71,7 @@ describe('Car Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ id: 14019 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -78,18 +80,18 @@ describe('Car Management Component', () => {
       );
   });
 
-  it('Should call load all on init', () => {
+  it('should call load all on init', () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.cars?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.cars()[0]).toEqual(expect.objectContaining({ id: 30624 }));
   });
 
   describe('trackId', () => {
-    it('Should forward to carService', () => {
-      const entity = { id: 123 };
+    it('should forward to carService', () => {
+      const entity = { id: 30624 };
       jest.spyOn(service, 'getCarIdentifier');
       const id = comp.trackId(entity);
       expect(service.getCarIdentifier).toHaveBeenCalledWith(entity);
@@ -126,6 +128,14 @@ describe('Car Management Component', () => {
 
     // THEN
     expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+  });
+
+  it('should calculate the filter attribute', () => {
+    // WHEN
+    comp.ngOnInit();
+
+    // THEN
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ 'someId.in': ['dc4279ea-cfb9-11ec-9d64-0242ac120002'] }));
   });
 
   describe('delete', () => {

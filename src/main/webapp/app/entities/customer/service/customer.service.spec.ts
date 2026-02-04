@@ -157,7 +157,7 @@ describe('Customer Service', () => {
     });
 
     describe('compareCustomer', () => {
-      it('Should return true if both entities are null', () => {
+      it('should return true if both entities are null', () => {
         const entity1 = null;
         const entity2 = null;
 
@@ -166,8 +166,8 @@ describe('Customer Service', () => {
         expect(compareResult).toEqual(true);
       });
 
-      it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+      it('should return false if one entity is null', () => {
+        const entity1 = { id: 26915 };
         const entity2 = null;
 
         const compareResult1 = service.compareCustomer(entity1, entity2);
@@ -177,9 +177,9 @@ describe('Customer Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should return false if primaryKey differs', () => {
+        const entity1 = { id: 26915 };
+        const entity2 = { id: 21032 };
 
         const compareResult1 = service.compareCustomer(entity1, entity2);
         const compareResult2 = service.compareCustomer(entity2, entity1);
@@ -188,9 +188,9 @@ describe('Customer Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+      it('should return false if primaryKey matches', () => {
+        const entity1 = { id: 26915 };
+        const entity2 = { id: 26915 };
 
         const compareResult1 = service.compareCustomer(entity1, entity2);
         const compareResult2 = service.compareCustomer(entity2, entity1);

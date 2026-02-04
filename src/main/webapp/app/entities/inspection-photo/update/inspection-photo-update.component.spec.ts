@@ -47,12 +47,12 @@ describe('InspectionPhoto Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Inspection query and add missing value', () => {
-      const inspectionPhoto: IInspectionPhoto = { id: 456 };
-      const inspection: IInspection = { id: 9823 };
+    it('should call Inspection query and add missing value', () => {
+      const inspectionPhoto: IInspectionPhoto = { id: 30316 };
+      const inspection: IInspection = { id: 2065 };
       inspectionPhoto.inspection = inspection;
 
-      const inspectionCollection: IInspection[] = [{ id: 3371 }];
+      const inspectionCollection: IInspection[] = [{ id: 2065 }];
       jest.spyOn(inspectionService, 'query').mockReturnValue(of(new HttpResponse({ body: inspectionCollection })));
       const additionalInspections = [inspection];
       const expectedCollection: IInspection[] = [...additionalInspections, ...inspectionCollection];
@@ -69,24 +69,24 @@ describe('InspectionPhoto Management Update Component', () => {
       expect(comp.inspectionsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const inspectionPhoto: IInspectionPhoto = { id: 456 };
-      const inspection: IInspection = { id: 8956 };
+    it('should update editForm', () => {
+      const inspectionPhoto: IInspectionPhoto = { id: 30316 };
+      const inspection: IInspection = { id: 2065 };
       inspectionPhoto.inspection = inspection;
 
       activatedRoute.data = of({ inspectionPhoto });
       comp.ngOnInit();
 
-      expect(comp.inspectionsSharedCollection).toContain(inspection);
+      expect(comp.inspectionsSharedCollection).toContainEqual(inspection);
       expect(comp.inspectionPhoto).toEqual(inspectionPhoto);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInspectionPhoto>>();
-      const inspectionPhoto = { id: 123 };
+      const inspectionPhoto = { id: 31807 };
       jest.spyOn(inspectionPhotoFormService, 'getInspectionPhoto').mockReturnValue(inspectionPhoto);
       jest.spyOn(inspectionPhotoService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -106,10 +106,10 @@ describe('InspectionPhoto Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInspectionPhoto>>();
-      const inspectionPhoto = { id: 123 };
+      const inspectionPhoto = { id: 31807 };
       jest.spyOn(inspectionPhotoFormService, 'getInspectionPhoto').mockReturnValue({ id: null });
       jest.spyOn(inspectionPhotoService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -129,10 +129,10 @@ describe('InspectionPhoto Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IInspectionPhoto>>();
-      const inspectionPhoto = { id: 123 };
+      const inspectionPhoto = { id: 31807 };
       jest.spyOn(inspectionPhotoService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ inspectionPhoto });
@@ -152,9 +152,9 @@ describe('InspectionPhoto Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareInspection', () => {
-      it('Should forward to inspectionService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to inspectionService', () => {
+        const entity = { id: 2065 };
+        const entity2 = { id: 29606 };
         jest.spyOn(inspectionService, 'compareInspection');
         comp.compareInspection(entity, entity2);
         expect(inspectionService.compareInspection).toHaveBeenCalledWith(entity, entity2);

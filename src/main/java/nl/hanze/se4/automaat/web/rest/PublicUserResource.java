@@ -1,7 +1,6 @@
 package nl.hanze.se4.automaat.web.rest;
 
 import java.util.*;
-import java.util.Collections;
 import nl.hanze.se4.automaat.service.UserService;
 import nl.hanze.se4.automaat.service.dto.UserDTO;
 import org.slf4j.Logger;

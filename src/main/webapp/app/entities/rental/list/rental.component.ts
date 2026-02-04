@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
@@ -18,7 +18,6 @@ import { EntityArrayResponseType, RentalService } from '../service/rental.servic
 import { RentalDeleteDialogComponent } from '../delete/rental-delete-dialog.component';
 
 @Component({
-  standalone: true,
   selector: 'jhi-rental',
   templateUrl: './rental.component.html',
   imports: [
@@ -27,8 +26,6 @@ import { RentalDeleteDialogComponent } from '../delete/rental-delete-dialog.comp
     SharedModule,
     SortDirective,
     SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
     FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
@@ -36,7 +33,7 @@ import { RentalDeleteDialogComponent } from '../delete/rental-delete-dialog.comp
 })
 export class RentalComponent implements OnInit {
   subscription: Subscription | null = null;
-  rentals?: IRental[];
+  rentals = signal<IRental[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -104,7 +101,7 @@ export class RentalComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.rentals = dataFromBody;
+    this.rentals.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(data: IRental[] | null): IRental[] {

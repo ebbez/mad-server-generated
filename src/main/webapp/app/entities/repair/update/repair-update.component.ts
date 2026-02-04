@@ -19,7 +19,6 @@ import { IRepair } from '../repair.model';
 import { RepairFormGroup, RepairFormService } from './repair-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-repair-update',
   templateUrl: './repair-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

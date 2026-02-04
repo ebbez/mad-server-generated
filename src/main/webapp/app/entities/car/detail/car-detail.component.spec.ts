@@ -21,7 +21,7 @@ describe('Car Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./car-detail.component').then(m => m.CarDetailComponent),
-              resolve: { car: () => of({ id: 123 }) },
+              resolve: { car: () => of({ id: 30624 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,17 +40,17 @@ describe('Car Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load car on init', async () => {
+    it('should load car on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', CarDetailComponent);
 
       // THEN
-      expect(instance.car()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.car()).toEqual(expect.objectContaining({ id: 30624 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe('Car Management Detail Component', () => {
   });
 
   describe('byteSize', () => {
-    it('Should call byteSize from DataUtils', () => {
+    it('should call byteSize from DataUtils', () => {
       // GIVEN
       jest.spyOn(dataUtils, 'byteSize');
       const fakeBase64 = 'fake base64';
@@ -72,9 +72,8 @@ describe('Car Management Detail Component', () => {
   });
 
   describe('openFile', () => {
-    it('Should call openFile from DataUtils', () => {
+    it('should call openFile from DataUtils', () => {
       const newWindow = { ...window };
-      newWindow.document.write = jest.fn();
       window.open = jest.fn(() => newWindow);
       window.onload = jest.fn(() => newWindow) as any;
       window.URL.createObjectURL = jest.fn() as any;

@@ -7,6 +7,11 @@ export const EntityNavbarItems: NavbarItem[] = [
     translationKey: 'global.menu.entities.car',
   },
   {
+    name: 'CarReview',
+    route: '/car-review',
+    translationKey: 'global.menu.entities.carReview',
+  },
+  {
     name: 'Rental',
     route: '/rental',
     translationKey: 'global.menu.entities.rental',

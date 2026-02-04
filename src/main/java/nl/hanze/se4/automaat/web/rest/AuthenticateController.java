@@ -1,7 +1,8 @@
 package nl.hanze.se4.automaat.web.rest;
 
-import static nl.hanze.se4.automaat.security.SecurityUtils.AUTHORITIES_KEY;
+import static nl.hanze.se4.automaat.security.SecurityUtils.AUTHORITIES_CLAIM;
 import static nl.hanze.se4.automaat.security.SecurityUtils.JWT_ALGORITHM;
+import static nl.hanze.se4.automaat.security.SecurityUtils.USER_ID_CLAIM;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
@@ -9,13 +10,13 @@ import java.security.Principal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
+import nl.hanze.se4.automaat.security.DomainUserDetailsService.UserWithId;
 import nl.hanze.se4.automaat.web.rest.vm.LoginVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -68,15 +69,15 @@ public class AuthenticateController {
     }
 
     /**
-     * {@code GET /authenticate} : check if the user is authenticated, and return its login.
+     * {@code GET /authenticate} : check if the user is authenticated.
      *
-     * @param principal the authentication principal.
-     * @return the login if the user is authenticated.
+     * @return the {@link ResponseEntity} with status {@code 204 (No Content)},
+     * or with status {@code 401 (Unauthorized)} if not authenticated.
      */
-    @GetMapping(value = "/authenticate", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String isAuthenticated(Principal principal) {
+    @GetMapping("/authenticate")
+    public ResponseEntity<Void> isAuthenticated(Principal principal) {
         LOG.debug("REST request to check if the current user is authenticated");
-        return principal == null ? null : principal.getName();
+        return ResponseEntity.status(principal == null ? HttpStatus.UNAUTHORIZED : HttpStatus.NO_CONTENT).build();
     }
 
     public String createToken(Authentication authentication, boolean rememberMe) {
@@ -91,15 +92,17 @@ public class AuthenticateController {
         }
 
         // @formatter:off
-        JwtClaimsSet claims = JwtClaimsSet.builder()
+        JwtClaimsSet.Builder builder = JwtClaimsSet.builder()
             .issuedAt(now)
             .expiresAt(validity)
             .subject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
-            .build();
+            .claim(AUTHORITIES_CLAIM, authorities);
+        if (authentication.getPrincipal() instanceof UserWithId user) {
+            builder.claim(USER_ID_CLAIM, user.getId());
+        }
 
         JwsHeader jwsHeader = JwsHeader.with(JWT_ALGORITHM).build();
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
+        return this.jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, builder.build())).getTokenValue();
     }
 
     /**

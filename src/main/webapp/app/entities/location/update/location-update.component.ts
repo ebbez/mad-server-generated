@@ -12,7 +12,6 @@ import { LocationService } from '../service/location.service';
 import { LocationFormGroup, LocationFormService } from './location-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-location-update',
   templateUrl: './location-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

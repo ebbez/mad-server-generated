@@ -1,0 +1,26 @@
+{
+  "autoMaatApp": {
+    "carReview": {
+      "home": {
+        "title": "Car Reviews",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Car Review",
+        "createOrEditLabel": "Maak of wijzig een Car Review",
+        "notFound": "No Car Reviews found"
+      },
+      "created": "A new Car Review is created with identifier {{ param }}",
+      "updated": "A Car Review is updated with identifier {{ param }}",
+      "deleted": "A Car Review is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Car Review {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Car Review"
+      },
+      "id": "ID",
+      "review": "Review",
+      "customer": "Customer",
+      "car": "Car"
+    }
+  }
+}

@@ -14,7 +14,6 @@ import { RouteFromToService } from '../service/route-from-to.service';
 import { RouteFromToFormGroup, RouteFromToFormService } from './route-from-to-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-route-from-to-update',
   templateUrl: './route-from-to-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

@@ -18,7 +18,7 @@ describe('Repair Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./repair-detail.component').then(m => m.RepairDetailComponent),
-              resolve: { repair: () => of({ id: 123 }) },
+              resolve: { repair: () => of({ id: 27883 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Repair Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load repair on init', async () => {
+    it('should load repair on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', RepairDetailComponent);
 
       // THEN
-      expect(instance.repair()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.repair()).toEqual(expect.objectContaining({ id: 27883 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

@@ -21,7 +21,7 @@ describe('InspectionPhoto Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./inspection-photo-detail.component').then(m => m.InspectionPhotoDetailComponent),
-              resolve: { inspectionPhoto: () => of({ id: 123 }) },
+              resolve: { inspectionPhoto: () => of({ id: 31807 }) },
             },
           ],
           withComponentInputBinding(),
@@ -40,17 +40,17 @@ describe('InspectionPhoto Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load inspectionPhoto on init', async () => {
+    it('should load inspectionPhoto on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', InspectionPhotoDetailComponent);
 
       // THEN
-      expect(instance.inspectionPhoto()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.inspectionPhoto()).toEqual(expect.objectContaining({ id: 31807 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe('InspectionPhoto Management Detail Component', () => {
   });
 
   describe('byteSize', () => {
-    it('Should call byteSize from DataUtils', () => {
+    it('should call byteSize from DataUtils', () => {
       // GIVEN
       jest.spyOn(dataUtils, 'byteSize');
       const fakeBase64 = 'fake base64';
@@ -72,9 +72,8 @@ describe('InspectionPhoto Management Detail Component', () => {
   });
 
   describe('openFile', () => {
-    it('Should call openFile from DataUtils', () => {
+    it('should call openFile from DataUtils', () => {
       const newWindow = { ...window };
-      newWindow.document.write = jest.fn();
       window.open = jest.fn(() => newWindow);
       window.onload = jest.fn(() => newWindow) as any;
       window.URL.createObjectURL = jest.fn() as any;

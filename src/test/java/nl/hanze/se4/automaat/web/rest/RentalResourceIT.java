@@ -129,12 +129,12 @@ class RentalResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         rental = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedRental != null) {
             rentalRepository.delete(insertedRental);
             insertedRental = null;

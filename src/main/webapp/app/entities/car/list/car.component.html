@@ -20,21 +20,21 @@
     </div>
   </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error />
 
-  <jhi-alert></jhi-alert>
+  <jhi-alert />
 
-  @if (cars?.length === 0) {
+  <jhi-filter [filters]="filters" />
+
+  @if (cars().length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="autoMaatApp.car.home.notFound">No Cars found</span>
     </div>
-  }
-
-  @if (cars && cars.length > 0) {
+  } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -144,7 +144,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (car of cars; track trackId(car)) {
+          @for (car of cars(); track trackId(car)) {
             <tr data-cy="entityTable">
               <td>
                 <a [routerLink]="['/car', car.id, 'view']">{{ car.id }}</a>
@@ -241,10 +241,10 @@
       </table>
     </div>
   }
-  @if (cars && cars.length > 0) {
+  @if (cars().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
       </div>
 
       <div class="d-flex justify-content-center">

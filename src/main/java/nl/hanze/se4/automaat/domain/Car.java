@@ -77,6 +77,10 @@ public class Car implements Serializable {
     private Set<Inspection> inspections = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
+    @JsonIgnoreProperties(value = { "customer", "car" }, allowSetters = true)
+    private Set<CarReview> reviews = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
     @JsonIgnoreProperties(value = { "car", "employee", "inspection" }, allowSetters = true)
     private Set<Repair> repairs = new HashSet<>();
 
@@ -322,6 +326,37 @@ public class Car implements Serializable {
     public Car removeInspection(Inspection inspection) {
         this.inspections.remove(inspection);
         inspection.setCar(null);
+        return this;
+    }
+
+    public Set<CarReview> getReviews() {
+        return this.reviews;
+    }
+
+    public void setReviews(Set<CarReview> carReviews) {
+        if (this.reviews != null) {
+            this.reviews.forEach(i -> i.setCar(null));
+        }
+        if (carReviews != null) {
+            carReviews.forEach(i -> i.setCar(this));
+        }
+        this.reviews = carReviews;
+    }
+
+    public Car reviews(Set<CarReview> carReviews) {
+        this.setReviews(carReviews);
+        return this;
+    }
+
+    public Car addReview(CarReview carReview) {
+        this.reviews.add(carReview);
+        carReview.setCar(this);
+        return this;
+    }
+
+    public Car removeReview(CarReview carReview) {
+        this.reviews.remove(carReview);
+        carReview.setCar(null);
         return this;
     }
 

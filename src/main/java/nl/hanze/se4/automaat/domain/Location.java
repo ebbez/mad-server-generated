@@ -34,7 +34,7 @@ public class Location implements Serializable {
     private String stateProvince;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
-    @JsonIgnoreProperties(value = { "systemUser", "rentals", "location" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "systemUser", "rentals", "reviews", "location" }, allowSetters = true)
     private Set<Customer> customers = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")

@@ -135,12 +135,12 @@ class InspectionResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         inspection = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedInspection != null) {
             inspectionRepository.delete(insertedInspection);
             insertedInspection = null;

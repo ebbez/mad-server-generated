@@ -81,12 +81,12 @@ class InspectionPhotoResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         inspectionPhoto = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedInspectionPhoto != null) {
             inspectionPhotoRepository.delete(insertedInspectionPhoto);
             insertedInspectionPhoto = null;

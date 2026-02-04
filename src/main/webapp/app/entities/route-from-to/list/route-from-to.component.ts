@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
@@ -17,24 +17,13 @@ import { EntityArrayResponseType, RouteFromToService } from '../service/route-fr
 import { RouteFromToDeleteDialogComponent } from '../delete/route-from-to-delete-dialog.component';
 
 @Component({
-  standalone: true,
   selector: 'jhi-route-from-to',
   templateUrl: './route-from-to.component.html',
-  imports: [
-    RouterModule,
-    FormsModule,
-    SharedModule,
-    SortDirective,
-    SortByDirective,
-    DurationPipe,
-    FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
-    ItemCountComponent,
-  ],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, FormatMediumDatePipe, ItemCountComponent],
 })
 export class RouteFromToComponent implements OnInit {
   subscription: Subscription | null = null;
-  routeFromTos?: IRouteFromTo[];
+  routeFromTos = signal<IRouteFromTo[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -98,7 +87,7 @@ export class RouteFromToComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.routeFromTos = dataFromBody;
+    this.routeFromTos.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(data: IRouteFromTo[] | null): IRouteFromTo[] {

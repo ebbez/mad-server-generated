@@ -131,7 +131,7 @@ describe('Authority Service', () => {
     });
 
     describe('compareAuthority', () => {
-      it('Should return true if both entities are null', () => {
+      it('should return true if both entities are null', () => {
         const entity1 = null;
         const entity2 = null;
 
@@ -140,8 +140,8 @@ describe('Authority Service', () => {
         expect(compareResult).toEqual(true);
       });
 
-      it('Should return false if one entity is null', () => {
-        const entity1 = { name: 'ABC' };
+      it('should return false if one entity is null', () => {
+        const entity1 = { name: '572a7ecc-bf76-43f4-8026-46b42fba586d' };
         const entity2 = null;
 
         const compareResult1 = service.compareAuthority(entity1, entity2);
@@ -151,9 +151,9 @@ describe('Authority Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey differs', () => {
-        const entity1 = { name: 'ABC' };
-        const entity2 = { name: 'CBA' };
+      it('should return false if primaryKey differs', () => {
+        const entity1 = { name: '572a7ecc-bf76-43f4-8026-46b42fba586d' };
+        const entity2 = { name: 'c56c1cf7-aca8-48fe-ad81-eeebbf872cb1' };
 
         const compareResult1 = service.compareAuthority(entity1, entity2);
         const compareResult2 = service.compareAuthority(entity2, entity1);
@@ -162,9 +162,9 @@ describe('Authority Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey matches', () => {
-        const entity1 = { name: 'ABC' };
-        const entity2 = { name: 'ABC' };
+      it('should return false if primaryKey matches', () => {
+        const entity1 = { name: '572a7ecc-bf76-43f4-8026-46b42fba586d' };
+        const entity2 = { name: '572a7ecc-bf76-43f4-8026-46b42fba586d' };
 
         const compareResult1 = service.compareAuthority(entity1, entity2);
         const compareResult2 = service.compareAuthority(entity2, entity1);

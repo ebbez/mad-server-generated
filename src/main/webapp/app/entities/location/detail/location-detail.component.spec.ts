@@ -18,7 +18,7 @@ describe('Location Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./location-detail.component').then(m => m.LocationDetailComponent),
-              resolve: { location: () => of({ id: 123 }) },
+              resolve: { location: () => of({ id: 8454 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Location Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load location on init', async () => {
+    it('should load location on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', LocationDetailComponent);
 
       // THEN
-      expect(instance.location()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.location()).toEqual(expect.objectContaining({ id: 8454 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

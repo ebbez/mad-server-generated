@@ -32,7 +32,7 @@ public class Repair implements Serializable {
     private LocalDate dateCompleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "inspections", "repairs", "rentals" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "inspections", "reviews", "repairs", "rentals" }, allowSetters = true)
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)

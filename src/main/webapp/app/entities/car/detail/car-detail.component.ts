@@ -2,15 +2,14 @@ import { Component, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatePipe } from 'app/shared/date';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { ICar } from '../car.model';
 
 @Component({
-  standalone: true,
   selector: 'jhi-car-detail',
   templateUrl: './car-detail.component.html',
-  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe],
+  imports: [SharedModule, RouterModule, FormatMediumDatePipe],
 })
 export class CarDetailComponent {
   car = input<ICar | null>(null);

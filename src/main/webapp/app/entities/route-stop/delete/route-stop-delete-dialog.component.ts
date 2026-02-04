@@ -8,7 +8,6 @@ import { IRouteStop } from '../route-stop.model';
 import { RouteStopService } from '../service/route-stop.service';
 
 @Component({
-  standalone: true,
   templateUrl: './route-stop-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

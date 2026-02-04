@@ -17,7 +17,6 @@ import { IInspectionPhoto } from '../inspection-photo.model';
 import { InspectionPhotoFormGroup, InspectionPhotoFormService } from './inspection-photo-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-inspection-photo-update',
   templateUrl: './inspection-photo-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

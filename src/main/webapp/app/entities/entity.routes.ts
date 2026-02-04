@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () => import('./car/car.routes'),
   },
   {
+    path: 'car-review',
+    data: { pageTitle: 'autoMaatApp.carReview.home.title' },
+    loadChildren: () => import('./car-review/car-review.routes'),
+  },
+  {
     path: 'rental',
     data: { pageTitle: 'autoMaatApp.rental.home.title' },
     loadChildren: () => import('./rental/rental.routes'),

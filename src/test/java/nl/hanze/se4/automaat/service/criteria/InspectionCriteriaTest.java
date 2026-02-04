@@ -2,6 +2,7 @@ package nl.hanze.se4.automaat.service.criteria;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import org.assertj.core.api.Condition;
@@ -12,7 +13,7 @@ class InspectionCriteriaTest {
     @Test
     void newInspectionCriteriaHasAllFiltersNullTest() {
         var inspectionCriteria = new InspectionCriteria();
-        assertThat(inspectionCriteria).is(criteriaFiltersAre(filter -> filter == null));
+        assertThat(inspectionCriteria).is(criteriaFiltersAre(Objects::isNull));
     }
 
     @Test
@@ -21,7 +22,7 @@ class InspectionCriteriaTest {
 
         setAllFilters(inspectionCriteria);
 
-        assertThat(inspectionCriteria).is(criteriaFiltersAre(filter -> filter != null));
+        assertThat(inspectionCriteria).is(criteriaFiltersAre(Objects::nonNull));
     }
 
     @Test
@@ -39,7 +40,7 @@ class InspectionCriteriaTest {
         );
 
         assertThat(copy).satisfies(
-            criteria -> assertThat(criteria).is(criteriaFiltersAre(filter -> filter == null)),
+            criteria -> assertThat(criteria).is(criteriaFiltersAre(Objects::isNull)),
             criteria -> assertThat(criteria).isEqualTo(inspectionCriteria)
         );
     }
@@ -61,7 +62,7 @@ class InspectionCriteriaTest {
         );
 
         assertThat(copy).satisfies(
-            criteria -> assertThat(criteria).is(criteriaFiltersAre(filter -> filter != null)),
+            criteria -> assertThat(criteria).is(criteriaFiltersAre(Objects::nonNull)),
             criteria -> assertThat(criteria).isEqualTo(inspectionCriteria)
         );
     }

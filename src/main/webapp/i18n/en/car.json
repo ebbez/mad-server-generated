@@ -33,6 +33,7 @@
       "longitude": "Longitude",
       "latitude": "Latitude",
       "inspection": "Inspection",
+      "review": "Review",
       "repair": "Repair",
       "rental": "Rental"
     }

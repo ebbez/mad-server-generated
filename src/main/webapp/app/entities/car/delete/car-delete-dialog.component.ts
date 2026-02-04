@@ -8,7 +8,6 @@ import { ICar } from '../car.model';
 import { CarService } from '../service/car.service';
 
 @Component({
-  standalone: true,
   templateUrl: './car-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

@@ -21,7 +21,6 @@ import { IInspection } from '../inspection.model';
 import { InspectionFormGroup, InspectionFormService } from './inspection-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-inspection-update',
   templateUrl: './inspection-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

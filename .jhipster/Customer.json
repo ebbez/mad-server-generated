@@ -1,12 +1,16 @@
 {
   "annotations": {
-    "changelogDate": "20241111085819"
+    "changelogDate": "20260106144738"
   },
   "applications": ["AutoMaat"],
   "fields": [
     {
       "fieldName": "nr",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "licenseChecked",
+      "fieldType": "Boolean"
     },
     {
       "fieldName": "lastName",
@@ -36,6 +40,13 @@
       "otherEntityName": "rental",
       "otherEntityRelationshipName": "customer",
       "relationshipName": "rental",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "carReview",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "review",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },

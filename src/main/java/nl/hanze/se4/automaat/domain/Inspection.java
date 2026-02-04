@@ -53,7 +53,7 @@ public class Inspection implements Serializable {
     private Set<Repair> repairs = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "inspections", "repairs", "rentals" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "inspections", "reviews", "repairs", "rentals" }, allowSetters = true)
     private Car car;
 
     @ManyToOne(fetch = FetchType.LAZY)

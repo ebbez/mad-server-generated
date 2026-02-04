@@ -21,6 +21,7 @@ describe('Customer Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nr: expect.any(Object),
+            licenseChecked: expect.any(Object),
             lastName: expect.any(Object),
             firstName: expect.any(Object),
             from: expect.any(Object),
@@ -37,6 +38,7 @@ describe('Customer Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nr: expect.any(Object),
+            licenseChecked: expect.any(Object),
             lastName: expect.any(Object),
             firstName: expect.any(Object),
             from: expect.any(Object),

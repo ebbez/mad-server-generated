@@ -10,6 +10,7 @@
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
         "adminAuthority": "Authority",
         "car": "Car",
+        "carReview": "Car Review",
         "rental": "Rental",
         "customer": "Customer",
         "employee": "Employee",

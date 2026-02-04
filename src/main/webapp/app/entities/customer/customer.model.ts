@@ -5,6 +5,7 @@ import { ILocation } from 'app/entities/location/location.model';
 export interface ICustomer {
   id: number;
   nr?: number | null;
+  licenseChecked?: boolean | null;
   lastName?: string | null;
   firstName?: string | null;
   from?: dayjs.Dayjs | null;

@@ -101,12 +101,12 @@ class RouteFromToResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         routeFromTo = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedRouteFromTo != null) {
             routeFromToRepository.delete(insertedRouteFromTo);
             insertedRouteFromTo = null;

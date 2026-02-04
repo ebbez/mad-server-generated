@@ -95,12 +95,12 @@ class LocationResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         location = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedLocation != null) {
             locationRepository.delete(insertedLocation);
             insertedLocation = null;

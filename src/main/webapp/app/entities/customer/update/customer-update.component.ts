@@ -16,7 +16,6 @@ import { ICustomer } from '../customer.model';
 import { CustomerFormGroup, CustomerFormService } from './customer-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-customer-update',
   templateUrl: './customer-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

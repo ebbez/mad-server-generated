@@ -18,7 +18,7 @@ describe('Customer Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./customer-detail.component').then(m => m.CustomerDetailComponent),
-              resolve: { customer: () => of({ id: 123 }) },
+              resolve: { customer: () => of({ id: 26915 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Customer Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load customer on init', async () => {
+    it('should load customer on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', CustomerDetailComponent);
 
       // THEN
-      expect(instance.customer()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.customer()).toEqual(expect.objectContaining({ id: 26915 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

@@ -43,8 +43,8 @@ describe('Car Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should update editForm', () => {
-      const car: ICar = { id: 456 };
+    it('should update editForm', () => {
+      const car: ICar = { id: 14019 };
 
       activatedRoute.data = of({ car });
       comp.ngOnInit();
@@ -54,10 +54,10 @@ describe('Car Management Update Component', () => {
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICar>>();
-      const car = { id: 123 };
+      const car = { id: 30624 };
       jest.spyOn(carFormService, 'getCar').mockReturnValue(car);
       jest.spyOn(carService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -77,10 +77,10 @@ describe('Car Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICar>>();
-      const car = { id: 123 };
+      const car = { id: 30624 };
       jest.spyOn(carFormService, 'getCar').mockReturnValue({ id: null });
       jest.spyOn(carService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -100,10 +100,10 @@ describe('Car Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<ICar>>();
-      const car = { id: 123 };
+      const car = { id: 30624 };
       jest.spyOn(carService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ car });

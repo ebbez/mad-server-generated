@@ -61,7 +61,7 @@ describe('Inspection Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 123 }],
+            body: [{ id: 2065 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=1&size=20>; rel="next"',
             }),
@@ -71,7 +71,7 @@ describe('Inspection Management Component', () => {
       .mockReturnValueOnce(
         of(
           new HttpResponse({
-            body: [{ id: 456 }],
+            body: [{ id: 29606 }],
             headers: new HttpHeaders({
               link: '<http://localhost/api/foo?page=0&size=20>; rel="prev",<http://localhost/api/foo?page=2&size=20>; rel="next"',
             }),
@@ -80,18 +80,18 @@ describe('Inspection Management Component', () => {
       );
   });
 
-  it('Should call load all on init', () => {
+  it('should call load all on init', () => {
     // WHEN
     comp.ngOnInit();
 
     // THEN
     expect(service.query).toHaveBeenCalled();
-    expect(comp.inspections?.[0]).toEqual(expect.objectContaining({ id: 123 }));
+    expect(comp.inspections()[0]).toEqual(expect.objectContaining({ id: 2065 }));
   });
 
   describe('trackId', () => {
-    it('Should forward to inspectionService', () => {
-      const entity = { id: 123 };
+    it('should forward to inspectionService', () => {
+      const entity = { id: 2065 };
       jest.spyOn(service, 'getInspectionIdentifier');
       const id = comp.trackId(entity);
       expect(service.getInspectionIdentifier).toHaveBeenCalledWith(entity);

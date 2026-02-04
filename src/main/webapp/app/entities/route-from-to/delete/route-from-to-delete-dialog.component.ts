@@ -8,7 +8,6 @@ import { IRouteFromTo } from '../route-from-to.model';
 import { RouteFromToService } from '../service/route-from-to.service';
 
 @Component({
-  standalone: true,
   templateUrl: './route-from-to-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

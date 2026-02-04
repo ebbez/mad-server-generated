@@ -25,6 +25,9 @@ public class Customer implements Serializable {
     @Column(name = "nr")
     private Integer nr;
 
+    @Column(name = "license_checked")
+    private Boolean licenseChecked;
+
     @Column(name = "last_name")
     private String lastName;
 
@@ -38,9 +41,13 @@ public class Customer implements Serializable {
     @JoinColumn(unique = true)
     private User systemUser;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     @JsonIgnoreProperties(value = { "inspections", "customer", "car" }, allowSetters = true)
     private Set<Rental> rentals = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @JsonIgnoreProperties(value = { "customer", "car" }, allowSetters = true)
+    private Set<CarReview> reviews = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "customers", "routeStops" }, allowSetters = true)
@@ -72,6 +79,19 @@ public class Customer implements Serializable {
 
     public void setNr(Integer nr) {
         this.nr = nr;
+    }
+
+    public Boolean getLicenseChecked() {
+        return this.licenseChecked;
+    }
+
+    public Customer licenseChecked(Boolean licenseChecked) {
+        this.setLicenseChecked(licenseChecked);
+        return this;
+    }
+
+    public void setLicenseChecked(Boolean licenseChecked) {
+        this.licenseChecked = licenseChecked;
     }
 
     public String getLastName() {
@@ -157,6 +177,37 @@ public class Customer implements Serializable {
         return this;
     }
 
+    public Set<CarReview> getReviews() {
+        return this.reviews;
+    }
+
+    public void setReviews(Set<CarReview> carReviews) {
+        if (this.reviews != null) {
+            this.reviews.forEach(i -> i.setCustomer(null));
+        }
+        if (carReviews != null) {
+            carReviews.forEach(i -> i.setCustomer(this));
+        }
+        this.reviews = carReviews;
+    }
+
+    public Customer reviews(Set<CarReview> carReviews) {
+        this.setReviews(carReviews);
+        return this;
+    }
+
+    public Customer addReview(CarReview carReview) {
+        this.reviews.add(carReview);
+        carReview.setCustomer(this);
+        return this;
+    }
+
+    public Customer removeReview(CarReview carReview) {
+        this.reviews.remove(carReview);
+        carReview.setCustomer(null);
+        return this;
+    }
+
     public Location getLocation() {
         return this.location;
     }
@@ -195,6 +246,7 @@ public class Customer implements Serializable {
         return "Customer{" +
             "id=" + getId() +
             ", nr=" + getNr() +
+            ", licenseChecked='" + getLicenseChecked() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", from='" + getFrom() + "'" +

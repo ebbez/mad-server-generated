@@ -18,7 +18,7 @@ describe('Rental Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./rental-detail.component').then(m => m.RentalDetailComponent),
-              resolve: { rental: () => of({ id: 123 }) },
+              resolve: { rental: () => of({ id: 12599 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Rental Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load rental on init', async () => {
+    it('should load rental on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', RentalDetailComponent);
 
       // THEN
-      expect(instance.rental()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.rental()).toEqual(expect.objectContaining({ id: 12599 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

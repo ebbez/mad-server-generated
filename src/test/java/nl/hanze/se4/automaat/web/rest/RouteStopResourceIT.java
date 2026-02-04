@@ -78,12 +78,12 @@ class RouteStopResourceIT {
     }
 
     @BeforeEach
-    public void initTest() {
+    void initTest() {
         routeStop = createEntity();
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         if (insertedRouteStop != null) {
             routeStopRepository.delete(insertedRouteStop);
             insertedRouteStop = null;

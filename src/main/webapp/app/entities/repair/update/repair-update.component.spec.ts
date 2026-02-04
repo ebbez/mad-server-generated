@@ -55,12 +55,12 @@ describe('Repair Management Update Component', () => {
   });
 
   describe('ngOnInit', () => {
-    it('Should call Car query and add missing value', () => {
-      const repair: IRepair = { id: 456 };
-      const car: ICar = { id: 20428 };
+    it('should call Car query and add missing value', () => {
+      const repair: IRepair = { id: 26230 };
+      const car: ICar = { id: 30624 };
       repair.car = car;
 
-      const carCollection: ICar[] = [{ id: 7855 }];
+      const carCollection: ICar[] = [{ id: 30624 }];
       jest.spyOn(carService, 'query').mockReturnValue(of(new HttpResponse({ body: carCollection })));
       const additionalCars = [car];
       const expectedCollection: ICar[] = [...additionalCars, ...carCollection];
@@ -74,12 +74,12 @@ describe('Repair Management Update Component', () => {
       expect(comp.carsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Employee query and add missing value', () => {
-      const repair: IRepair = { id: 456 };
-      const employee: IEmployee = { id: 30185 };
+    it('should call Employee query and add missing value', () => {
+      const repair: IRepair = { id: 26230 };
+      const employee: IEmployee = { id: 1749 };
       repair.employee = employee;
 
-      const employeeCollection: IEmployee[] = [{ id: 13226 }];
+      const employeeCollection: IEmployee[] = [{ id: 1749 }];
       jest.spyOn(employeeService, 'query').mockReturnValue(of(new HttpResponse({ body: employeeCollection })));
       const additionalEmployees = [employee];
       const expectedCollection: IEmployee[] = [...additionalEmployees, ...employeeCollection];
@@ -96,12 +96,12 @@ describe('Repair Management Update Component', () => {
       expect(comp.employeesSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Inspection query and add missing value', () => {
-      const repair: IRepair = { id: 456 };
-      const inspection: IInspection = { id: 6983 };
+    it('should call Inspection query and add missing value', () => {
+      const repair: IRepair = { id: 26230 };
+      const inspection: IInspection = { id: 2065 };
       repair.inspection = inspection;
 
-      const inspectionCollection: IInspection[] = [{ id: 3472 }];
+      const inspectionCollection: IInspection[] = [{ id: 2065 }];
       jest.spyOn(inspectionService, 'query').mockReturnValue(of(new HttpResponse({ body: inspectionCollection })));
       const additionalInspections = [inspection];
       const expectedCollection: IInspection[] = [...additionalInspections, ...inspectionCollection];
@@ -118,30 +118,30 @@ describe('Repair Management Update Component', () => {
       expect(comp.inspectionsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should update editForm', () => {
-      const repair: IRepair = { id: 456 };
-      const car: ICar = { id: 29398 };
+    it('should update editForm', () => {
+      const repair: IRepair = { id: 26230 };
+      const car: ICar = { id: 30624 };
       repair.car = car;
-      const employee: IEmployee = { id: 19114 };
+      const employee: IEmployee = { id: 1749 };
       repair.employee = employee;
-      const inspection: IInspection = { id: 19330 };
+      const inspection: IInspection = { id: 2065 };
       repair.inspection = inspection;
 
       activatedRoute.data = of({ repair });
       comp.ngOnInit();
 
-      expect(comp.carsSharedCollection).toContain(car);
-      expect(comp.employeesSharedCollection).toContain(employee);
-      expect(comp.inspectionsSharedCollection).toContain(inspection);
+      expect(comp.carsSharedCollection).toContainEqual(car);
+      expect(comp.employeesSharedCollection).toContainEqual(employee);
+      expect(comp.inspectionsSharedCollection).toContainEqual(inspection);
       expect(comp.repair).toEqual(repair);
     });
   });
 
   describe('save', () => {
-    it('Should call update service on save for existing entity', () => {
+    it('should call update service on save for existing entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRepair>>();
-      const repair = { id: 123 };
+      const repair = { id: 27883 };
       jest.spyOn(repairFormService, 'getRepair').mockReturnValue(repair);
       jest.spyOn(repairService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -161,10 +161,10 @@ describe('Repair Management Update Component', () => {
       expect(comp.isSaving).toEqual(false);
     });
 
-    it('Should call create service on save for new entity', () => {
+    it('should call create service on save for new entity', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRepair>>();
-      const repair = { id: 123 };
+      const repair = { id: 27883 };
       jest.spyOn(repairFormService, 'getRepair').mockReturnValue({ id: null });
       jest.spyOn(repairService, 'create').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
@@ -184,10 +184,10 @@ describe('Repair Management Update Component', () => {
       expect(comp.previousState).toHaveBeenCalled();
     });
 
-    it('Should set isSaving to false on error', () => {
+    it('should set isSaving to false on error', () => {
       // GIVEN
       const saveSubject = new Subject<HttpResponse<IRepair>>();
-      const repair = { id: 123 };
+      const repair = { id: 27883 };
       jest.spyOn(repairService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');
       activatedRoute.data = of({ repair });
@@ -207,9 +207,9 @@ describe('Repair Management Update Component', () => {
 
   describe('Compare relationships', () => {
     describe('compareCar', () => {
-      it('Should forward to carService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to carService', () => {
+        const entity = { id: 30624 };
+        const entity2 = { id: 14019 };
         jest.spyOn(carService, 'compareCar');
         comp.compareCar(entity, entity2);
         expect(carService.compareCar).toHaveBeenCalledWith(entity, entity2);
@@ -217,9 +217,9 @@ describe('Repair Management Update Component', () => {
     });
 
     describe('compareEmployee', () => {
-      it('Should forward to employeeService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to employeeService', () => {
+        const entity = { id: 1749 };
+        const entity2 = { id: 1545 };
         jest.spyOn(employeeService, 'compareEmployee');
         comp.compareEmployee(entity, entity2);
         expect(employeeService.compareEmployee).toHaveBeenCalledWith(entity, entity2);
@@ -227,9 +227,9 @@ describe('Repair Management Update Component', () => {
     });
 
     describe('compareInspection', () => {
-      it('Should forward to inspectionService', () => {
-        const entity = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should forward to inspectionService', () => {
+        const entity = { id: 2065 };
+        const entity2 = { id: 29606 };
         jest.spyOn(inspectionService, 'compareInspection');
         comp.compareInspection(entity, entity2);
         expect(inspectionService.compareInspection).toHaveBeenCalledWith(entity, entity2);

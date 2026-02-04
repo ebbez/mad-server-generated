@@ -8,7 +8,6 @@ import { IRepair } from '../repair.model';
 import { RepairService } from '../service/repair.service';
 
 @Component({
-  standalone: true,
   templateUrl: './repair-delete-dialog.component.html',
   imports: [SharedModule, FormsModule],
 })

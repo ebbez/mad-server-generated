@@ -18,7 +18,7 @@ describe('RouteFromTo Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./route-from-to-detail.component').then(m => m.RouteFromToDetailComponent),
-              resolve: { routeFromTo: () => of({ id: 123 }) },
+              resolve: { routeFromTo: () => of({ id: 23404 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('RouteFromTo Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load routeFromTo on init', async () => {
+    it('should load routeFromTo on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', RouteFromToDetailComponent);
 
       // THEN
-      expect(instance.routeFromTo()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.routeFromTo()).toEqual(expect.objectContaining({ id: 23404 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

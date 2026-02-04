@@ -5,8 +5,6 @@ import nl.hanze.se4.automaat.domain.Car;
 import nl.hanze.se4.automaat.repository.CarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -108,18 +106,6 @@ public class CarService {
                 return existingCar;
             })
             .map(carRepository::save);
-    }
-
-    /**
-     * Get all the cars.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    @Transactional(readOnly = true)
-    public Page<Car> findAll(Pageable pageable) {
-        LOG.debug("Request to get all Cars");
-        return carRepository.findAll(pageable);
     }
 
     /**

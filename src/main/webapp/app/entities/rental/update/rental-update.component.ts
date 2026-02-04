@@ -17,7 +17,6 @@ import { IRental } from '../rental.model';
 import { RentalFormGroup, RentalFormService } from './rental-form.service';
 
 @Component({
-  standalone: true,
   selector: 'jhi-rental-update',
   templateUrl: './rental-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],

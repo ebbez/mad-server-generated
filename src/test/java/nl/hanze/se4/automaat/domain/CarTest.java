@@ -1,5 +1,6 @@
 package nl.hanze.se4.automaat.domain;
 
+import static nl.hanze.se4.automaat.domain.CarReviewTestSamples.*;
 import static nl.hanze.se4.automaat.domain.CarTestSamples.*;
 import static nl.hanze.se4.automaat.domain.InspectionTestSamples.*;
 import static nl.hanze.se4.automaat.domain.RentalTestSamples.*;
@@ -47,6 +48,28 @@ class CarTest {
         car.setInspections(new HashSet<>());
         assertThat(car.getInspections()).doesNotContain(inspectionBack);
         assertThat(inspectionBack.getCar()).isNull();
+    }
+
+    @Test
+    void reviewTest() {
+        Car car = getCarRandomSampleGenerator();
+        CarReview carReviewBack = getCarReviewRandomSampleGenerator();
+
+        car.addReview(carReviewBack);
+        assertThat(car.getReviews()).containsOnly(carReviewBack);
+        assertThat(carReviewBack.getCar()).isEqualTo(car);
+
+        car.removeReview(carReviewBack);
+        assertThat(car.getReviews()).doesNotContain(carReviewBack);
+        assertThat(carReviewBack.getCar()).isNull();
+
+        car.reviews(new HashSet<>(Set.of(carReviewBack)));
+        assertThat(car.getReviews()).containsOnly(carReviewBack);
+        assertThat(carReviewBack.getCar()).isEqualTo(car);
+
+        car.setReviews(new HashSet<>());
+        assertThat(car.getReviews()).doesNotContain(carReviewBack);
+        assertThat(carReviewBack.getCar()).isNull();
     }
 
     @Test

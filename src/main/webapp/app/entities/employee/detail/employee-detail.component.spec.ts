@@ -18,7 +18,7 @@ describe('Employee Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./employee-detail.component').then(m => m.EmployeeDetailComponent),
-              resolve: { employee: () => of({ id: 123 }) },
+              resolve: { employee: () => of({ id: 1749 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Employee Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load employee on init', async () => {
+    it('should load employee on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', EmployeeDetailComponent);
 
       // THEN
-      expect(instance.employee()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.employee()).toEqual(expect.objectContaining({ id: 1749 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

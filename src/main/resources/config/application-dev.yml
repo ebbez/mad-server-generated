@@ -15,10 +15,10 @@
 
 logging:
   level:
-    ROOT: INFO
-    tech.jhipster: INFO
-    org.hibernate.SQL: INFO
-    nl.hanze.se4.automaat: INFO
+    ROOT: DEBUG
+    tech.jhipster: DEBUG
+    org.hibernate.SQL: DEBUG
+    nl.hanze.se4.automaat: DEBUG
 
 spring:
   devtools:
@@ -38,7 +38,6 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:AutoMaat;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
-    #    url: jdbc:h2:file:./automaat-h2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
     username: AutoMaat
     password:
     hikari:
@@ -88,7 +87,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: MTNmZjMxODQ4NTIwNjJmYjgwZTUyNmYzMjM5YTU0NDgyZDQ0NmJkMmZiZjM2MmFhNTA5YTIwYmZlODUzM2U3NDEzZjhkOTNjYjJjNmUwMjZjMmU5NjQ0MGNkMzFlZjkwOWJhMDMxMzYyZWU2M2ZiZjQwNGIzNjAyZjg0MTlhODE=
+        base64-secret: OTI4ZDFlYjdhZjYwZTc2MTBmNzg2OTAxZDViYjAzOWQyNjJmNTdkMzc2ZTk4YzZhZmFhZTljMWExY2QxNTdmNzA4MWY3YmMwNzc3ZTc1Y2I5NDI3NTQzM2RjMDU4ZGNjZDdmYjZmYmJiYzlhNjRjYjQ1Yjc4YTQ5ODczODVkOWI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

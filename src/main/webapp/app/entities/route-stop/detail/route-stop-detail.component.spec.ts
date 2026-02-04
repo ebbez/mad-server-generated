@@ -18,7 +18,7 @@ describe('RouteStop Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./route-stop-detail.component').then(m => m.RouteStopDetailComponent),
-              resolve: { routeStop: () => of({ id: 123 }) },
+              resolve: { routeStop: () => of({ id: 6529 }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('RouteStop Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load routeStop on init', async () => {
+    it('should load routeStop on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', RouteStopDetailComponent);
 
       // THEN
-      expect(instance.routeStop()).toEqual(expect.objectContaining({ id: 123 }));
+      expect(instance.routeStop()).toEqual(expect.objectContaining({ id: 6529 }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

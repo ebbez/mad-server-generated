@@ -7,12 +7,11 @@
     "cacheProvider": "no",
     "clientFramework": "angular",
     "clientPackageManager": "npm",
-    "creationTimestamp": 1731315502776,
     "databaseType": "sql",
     "devDatabaseType": "h2Memory",
-    "devServerPort": 4200,
     "entities": [
       "Car",
+      "CarReview",
       "Rental",
       "Customer",
       "Employee",
@@ -23,10 +22,10 @@
       "RouteFromTo",
       "RouteStop"
     ],
-    "jhipsterVersion": "8.7.3",
-    "jwtSecretKey": "MTNmZjMxODQ4NTIwNjJmYjgwZTUyNmYzMjM5YTU0NDgyZDQ0NmJkMmZiZjM2MmFhNTA5YTIwYmZlODUzM2U3NDEzZjhkOTNjYjJjNmUwMjZjMmU5NjQ0MGNkMzFlZjkwOWJhMDMxMzYyZWU2M2ZiZjQwNGIzNjAyZjg0MTlhODE=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "OTI4ZDFlYjdhZjYwZTc2MTBmNzg2OTAxZDViYjAzOWQyNjJmNTdkMzc2ZTk4YzZhZmFhZTljMWExY2QxNTdmNzA4MWY3YmMwNzc3ZTc1Y2I5NDI3NTQzM2RjMDU4ZGNjZDdmYjZmYmJiYzlhNjRjYjQ1Yjc4YTQ5ODczODVkOWI=",
     "languages": ["en", "nl"],
-    "lastLiquibaseTimestamp": 1731315919000,
+    "lastLiquibaseTimestamp": 1767711278000,
     "nativeLanguage": "en",
     "packageName": "nl.hanze.se4.automaat",
     "prodDatabaseType": "mysql"

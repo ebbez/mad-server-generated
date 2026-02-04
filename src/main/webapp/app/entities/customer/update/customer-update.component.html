@@ -6,7 +6,7 @@
       </h2>
 
       <div>
-        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-error />
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
@@ -18,6 +18,18 @@
         <div class="mb-3">
           <label class="form-label" for="field_nr" jhiTranslate="autoMaatApp.customer.nr">Nr</label>
           <input type="number" class="form-control" name="nr" id="field_nr" data-cy="nr" formControlName="nr" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_licenseChecked" jhiTranslate="autoMaatApp.customer.licenseChecked">License Checked</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="licenseChecked"
+            id="field_licenseChecked"
+            data-cy="licenseChecked"
+            formControlName="licenseChecked"
+          />
         </div>
 
         <div class="mb-3">

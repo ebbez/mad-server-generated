@@ -6,9 +6,9 @@
 
         <hr />
 
-        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-error />
 
-        <jhi-alert></jhi-alert>
+        <jhi-alert />
 
         <dl class="row-md jh-entity-details">
           <dt><span jhiTranslate="global.field.id">ID</span></dt>
@@ -18,6 +18,10 @@
           <dt><span jhiTranslate="autoMaatApp.customer.nr">Nr</span></dt>
           <dd>
             <span>{{ customerRef.nr }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.customer.licenseChecked">License Checked</span></dt>
+          <dd>
+            <span>{{ customerRef.licenseChecked }}</span>
           </dd>
           <dt><span jhiTranslate="autoMaatApp.customer.lastName">Last Name</span></dt>
           <dd>

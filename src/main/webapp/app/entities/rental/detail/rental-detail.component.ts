@@ -2,14 +2,13 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatePipe } from 'app/shared/date';
 import { IRental } from '../rental.model';
 
 @Component({
-  standalone: true,
   selector: 'jhi-rental-detail',
   templateUrl: './rental-detail.component.html',
-  imports: [SharedModule, RouterModule, DurationPipe, FormatMediumDatetimePipe, FormatMediumDatePipe],
+  imports: [SharedModule, RouterModule, FormatMediumDatePipe],
 })
 export class RentalDetailComponent {
   rental = input<IRental | null>(null);

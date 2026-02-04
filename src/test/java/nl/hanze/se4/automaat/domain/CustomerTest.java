@@ -1,5 +1,6 @@
 package nl.hanze.se4.automaat.domain;
 
+import static nl.hanze.se4.automaat.domain.CarReviewTestSamples.*;
 import static nl.hanze.se4.automaat.domain.CustomerTestSamples.*;
 import static nl.hanze.se4.automaat.domain.LocationTestSamples.*;
 import static nl.hanze.se4.automaat.domain.RentalTestSamples.*;
@@ -46,6 +47,28 @@ class CustomerTest {
         customer.setRentals(new HashSet<>());
         assertThat(customer.getRentals()).doesNotContain(rentalBack);
         assertThat(rentalBack.getCustomer()).isNull();
+    }
+
+    @Test
+    void reviewTest() {
+        Customer customer = getCustomerRandomSampleGenerator();
+        CarReview carReviewBack = getCarReviewRandomSampleGenerator();
+
+        customer.addReview(carReviewBack);
+        assertThat(customer.getReviews()).containsOnly(carReviewBack);
+        assertThat(carReviewBack.getCustomer()).isEqualTo(customer);
+
+        customer.removeReview(carReviewBack);
+        assertThat(customer.getReviews()).doesNotContain(carReviewBack);
+        assertThat(carReviewBack.getCustomer()).isNull();
+
+        customer.reviews(new HashSet<>(Set.of(carReviewBack)));
+        assertThat(customer.getReviews()).containsOnly(carReviewBack);
+        assertThat(carReviewBack.getCustomer()).isEqualTo(customer);
+
+        customer.setReviews(new HashSet<>());
+        assertThat(customer.getReviews()).doesNotContain(carReviewBack);
+        assertThat(carReviewBack.getCustomer()).isNull();
     }
 
     @Test

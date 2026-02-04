@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { DurationPipe, FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
+import { FormatMediumDatetimePipe } from 'app/shared/date';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
@@ -19,7 +19,6 @@ import { InspectionDeleteDialogComponent } from '../delete/inspection-delete-dia
 import { IInspection } from '../inspection.model';
 
 @Component({
-  standalone: true,
   selector: 'jhi-inspection',
   templateUrl: './inspection.component.html',
   imports: [
@@ -28,16 +27,14 @@ import { IInspection } from '../inspection.model';
     SharedModule,
     SortDirective,
     SortByDirective,
-    DurationPipe,
     FormatMediumDatetimePipe,
-    FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
   ],
 })
 export class InspectionComponent implements OnInit {
   subscription: Subscription | null = null;
-  inspections?: IInspection[];
+  inspections = signal<IInspection[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -114,7 +111,7 @@ export class InspectionComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.inspections = dataFromBody;
+    this.inspections.set(dataFromBody);
   }
 
   protected fillComponentAttributesFromResponseBody(data: IInspection[] | null): IInspection[] {

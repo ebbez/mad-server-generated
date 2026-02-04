@@ -20,21 +20,19 @@
     </div>
   </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error />
 
-  <jhi-alert></jhi-alert>
+  <jhi-alert />
 
-  @if (customers?.length === 0) {
+  @if (customers().length === 0) {
     <div class="alert alert-warning" id="no-result">
       <span jhiTranslate="autoMaatApp.customer.home.notFound">No Customers found</span>
     </div>
-  }
-
-  @if (customers && customers.length > 0) {
+  } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
             <th scope="col" jhiSortBy="id">
               <div class="d-flex">
                 <span jhiTranslate="global.field.id">ID</span>
@@ -45,6 +43,13 @@
             <th scope="col" jhiSortBy="nr">
               <div class="d-flex">
                 <span jhiTranslate="autoMaatApp.customer.nr">Nr</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="licenseChecked">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.customer.licenseChecked">License Checked</span>
 
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
@@ -86,12 +91,13 @@
           </tr>
         </thead>
         <tbody>
-          @for (customer of customers; track trackId(customer)) {
+          @for (customer of customers(); track trackId(customer)) {
             <tr data-cy="entityTable">
               <td>
                 <a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a>
               </td>
               <td>{{ customer.nr }}</td>
+              <td>{{ customer.licenseChecked }}</td>
               <td>{{ customer.lastName }}</td>
               <td>{{ customer.firstName }}</td>
               <td>{{ customer.from | formatMediumDate }}</td>
@@ -144,10 +150,10 @@
       </table>
     </div>
   }
-  @if (customers && customers.length > 0) {
+  @if (customers().length > 0) {
     <div>
       <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
       </div>
 
       <div class="d-flex justify-content-center">

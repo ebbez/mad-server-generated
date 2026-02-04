@@ -18,7 +18,7 @@ describe('Authority Management Detail Component', () => {
             {
               path: '**',
               loadComponent: () => import('./authority-detail.component').then(m => m.AuthorityDetailComponent),
-              resolve: { authority: () => of({ name: 'ABC' }) },
+              resolve: { authority: () => of({ name: '572a7ecc-bf76-43f4-8026-46b42fba586d' }) },
             },
           ],
           withComponentInputBinding(),
@@ -35,17 +35,17 @@ describe('Authority Management Detail Component', () => {
   });
 
   describe('OnInit', () => {
-    it('Should load authority on init', async () => {
+    it('should load authority on init', async () => {
       const harness = await RouterTestingHarness.create();
       const instance = await harness.navigateByUrl('/', AuthorityDetailComponent);
 
       // THEN
-      expect(instance.authority()).toEqual(expect.objectContaining({ name: 'ABC' }));
+      expect(instance.authority()).toEqual(expect.objectContaining({ name: '572a7ecc-bf76-43f4-8026-46b42fba586d' }));
     });
   });
 
   describe('PreviousState', () => {
-    it('Should navigate to previous state', () => {
+    it('should navigate to previous state', () => {
       jest.spyOn(window.history, 'back');
       comp.previousState();
       expect(window.history.back).toHaveBeenCalled();

@@ -14,11 +14,12 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  */
 type CustomerFormGroupInput = ICustomer | PartialWithRequiredKeyOf<NewCustomer>;
 
-type CustomerFormDefaults = Pick<NewCustomer, 'id'>;
+type CustomerFormDefaults = Pick<NewCustomer, 'id' | 'licenseChecked'>;
 
 type CustomerFormGroupContent = {
   id: FormControl<ICustomer['id'] | NewCustomer['id']>;
   nr: FormControl<ICustomer['nr']>;
+  licenseChecked: FormControl<ICustomer['licenseChecked']>;
   lastName: FormControl<ICustomer['lastName']>;
   firstName: FormControl<ICustomer['firstName']>;
   from: FormControl<ICustomer['from']>;
@@ -44,6 +45,7 @@ export class CustomerFormService {
         },
       ),
       nr: new FormControl(customerRawValue.nr),
+      licenseChecked: new FormControl(customerRawValue.licenseChecked),
       lastName: new FormControl(customerRawValue.lastName),
       firstName: new FormControl(customerRawValue.firstName),
       from: new FormControl(customerRawValue.from),
@@ -69,6 +71,7 @@ export class CustomerFormService {
   private getFormDefaults(): CustomerFormDefaults {
     return {
       id: null,
+      licenseChecked: false,
     };
   }
 }

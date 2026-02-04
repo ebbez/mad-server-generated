@@ -155,7 +155,7 @@ describe('RouteStop Service', () => {
     });
 
     describe('compareRouteStop', () => {
-      it('Should return true if both entities are null', () => {
+      it('should return true if both entities are null', () => {
         const entity1 = null;
         const entity2 = null;
 
@@ -164,8 +164,8 @@ describe('RouteStop Service', () => {
         expect(compareResult).toEqual(true);
       });
 
-      it('Should return false if one entity is null', () => {
-        const entity1 = { id: 123 };
+      it('should return false if one entity is null', () => {
+        const entity1 = { id: 6529 };
         const entity2 = null;
 
         const compareResult1 = service.compareRouteStop(entity1, entity2);
@@ -175,9 +175,9 @@ describe('RouteStop Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey differs', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 456 };
+      it('should return false if primaryKey differs', () => {
+        const entity1 = { id: 6529 };
+        const entity2 = { id: 4983 };
 
         const compareResult1 = service.compareRouteStop(entity1, entity2);
         const compareResult2 = service.compareRouteStop(entity2, entity1);
@@ -186,9 +186,9 @@ describe('RouteStop Service', () => {
         expect(compareResult2).toEqual(false);
       });
 
-      it('Should return false if primaryKey matches', () => {
-        const entity1 = { id: 123 };
-        const entity2 = { id: 123 };
+      it('should return false if primaryKey matches', () => {
+        const entity1 = { id: 6529 };
+        const entity2 = { id: 6529 };
 
         const compareResult1 = service.compareRouteStop(entity1, entity2);
         const compareResult2 = service.compareRouteStop(entity2, entity1);
